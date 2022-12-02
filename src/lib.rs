@@ -8,3 +8,4 @@ pub mod user;
 pub mod notification;
 pub mod hidden_banner;
 pub mod banner;
+pub mod websocket_message;

@@ -2,6 +2,7 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 #[allow(non_snake_case)]
+#[serde(rename_all = "camelCase")]
 pub struct PublicUserInfo {
     pub username: String,
     pub name: String,
@@ -18,8 +19,9 @@ pub struct PublicUserInfo {
     pub id: u32,
     pub room_id: String,
 
-    pub sharedSaves: Vec<String>,
+    pub shared_saves: Vec<String>,
 }
+
 
 impl Default for PublicUserInfo {
     fn default() -> Self {
@@ -38,7 +40,7 @@ impl Default for PublicUserInfo {
             shares: Vec::new(),
             id: 0,
             room_id: "".to_owned(),
-            sharedSaves: Vec::new(),
+            shared_saves: Vec::new(),
         }
     }
 
