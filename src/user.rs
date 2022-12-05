@@ -2,6 +2,8 @@ use serde::{Serialize, Deserialize};
 use chrono::prelude::*;
 use chrono_tz::Tz;
 
+use crate::public_user_info::PublicUserInfo;
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct User {
     pub activated: bool,
@@ -274,6 +276,35 @@ impl User {
             return true;
         }
         return false;
+    }
+
+    pub fn get_display_name(&self) -> String {
+        if self.share_display_name.is_empty() {
+            self.share_display_name.to_owned()
+        } else {
+            self.username.to_owned()
+        }
+    }
+
+    pub fn get_public_info(&self) -> PublicUserInfo {
+        PublicUserInfo {
+            username: self.username.to_owned(),
+            name: self.get_display_name(),
+            twitter: self.twitter.to_owned(),
+            image: self.image_url.to_owned(),
+            r#type: "".to_owned(),
+            page: "".to_owned(),
+            banned: false,
+            banned_reason: "".to_owned(),
+            show_user_page: self.show_user_page,
+            user_page_url: "".to_owned(),
+            bio: Vec::new(),
+            shares: Vec::new(),
+            id: self.id,
+            room_id: "".to_owned(),
+
+            shared_saves: Vec::new(),
+        }
     }
 
 }
