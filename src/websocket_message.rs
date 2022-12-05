@@ -11,7 +11,8 @@ pub enum WebsocketMessageType {
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct WebSocketMessage {
-    pub token: String,
+    pub token: Option<String>,
     pub kind: WebsocketMessageType,
     pub user: Option<PublicUserInfo>,
+    pub payload: Option<String>,
 }

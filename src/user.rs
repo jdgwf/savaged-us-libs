@@ -265,6 +265,24 @@ impl User {
         return false;
     }
 
+
+    pub fn get_real_name(&self) -> String {
+        let mut real_name = "".to_string();
+
+        if !self.first_name.is_empty() {
+            real_name = self.first_name.to_owned();
+        }
+        if !self.last_name.is_empty() {
+            real_name = real_name + &" ".to_owned() + &self.first_name.to_owned();
+        }
+
+        if real_name.is_empty() {
+            return self.username.to_owned();
+        } else {
+            return real_name.trim().to_owned()
+        }
+    }
+
     pub fn has_admin_access(&self) -> bool {
         if self.is_admin  {
             return true;
