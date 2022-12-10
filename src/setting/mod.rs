@@ -5,36 +5,33 @@
 // pub mod exports;
 pub mod imports;
 
-use crate::json_data;
+use crate::{player_character::chargen_data::ChargenData};
 
 use uuid::{Uuid};
 // use attributes::Attributes;
 // use edge::Edge;
 // use hindrance::Hindrance;
 // use chrono::prelude::*;
-use json_data::json_chargen_data::JSONChargenData;
-// use json_data::json_chargen_book::JSONBookDefinition;
-// use json_data::json_chargen_edge::JSONEdgeDefinition;
-// use json_data::json_chargen_hindrance::JSONHindranceDefinition;
-// use json_data::json_chargen_weapon::JSONWeaponDefinition;
-// use json_data::json_chargen_armor::JSONArmorDefinition;
-// use json_data::json_chargen_gear::JSONGearDefinition;
-// use json_data::json_chargen_setting::JSONSettingDefinition;
+
 // // use serde::{Serialize, Deserialize};
 
 // use std::collections::HashMap;
 
 // use serde::{Serialize, Deserialize};
 
-#[derive(Clone, Debug)]
+use serde::{Serialize, Deserialize};
+use serde;
 
+#[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct Setting {
 
     pub name: String,
 
+    #[serde(default)]
     pub uuid: Uuid,
 
-    available_data: JSONChargenData,
+    // #[serde(skip)]
+    // available_data: ChargenData,
 }
 
 // WASM Bindgen Getters/Setters
@@ -42,26 +39,26 @@ pub struct Setting {
 impl Setting {
 
     pub fn new(
-        available_data: String,
+        available_data: ChargenData,
     ) -> Setting {
         //use the . operator to fetch the value of a field via the self keyword
         let setting = Setting{
             name: "".to_owned(),
             uuid: Uuid::new_v4(),
-            available_data: serde_json::from_str(&available_data).unwrap(),
+            // available_data: available_data,
         };
 
         setting
     }
 
     pub fn new_import(
-        available_data: JSONChargenData,
+        available_data: ChargenData,
     ) -> Setting {
         //use the . operator to fetch the value of a field via the self keyword
         let setting = Setting{
             name: "".to_owned(),
             uuid: Uuid::new_v4(),
-            available_data: available_data.clone(),
+            // available_data: available_data.clone(),
         };
 
         setting

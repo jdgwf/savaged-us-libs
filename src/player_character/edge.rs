@@ -1,40 +1,61 @@
 use uuid::{Uuid};
 use crate::player_character::PlayerCharacter;
 // use std::collections::HashMap;
-use crate::json_data::json_chargen_data::JSONChargenData;
-use crate::json_data::json_chargen_edge::JSONEdgeDefinition;
-use crate::json_data::json_chargen_edge::JSONEdgeVars;
+// use crate::json_data::json_chargen_data::ChargenData;
+// use crate::json_data::json_chargen_edge::JSONEdgeDefinition;
+// use crate::json_data::json_chargen_edge::JSONEdgeVars;
 use chrono::prelude::*;
 use super::super::utils::bool_from_int_or_bool;
+use super::chargen_data::ChargenData;
 // use super::super::utils::string_to_uuid;
 use serde::{Serialize, Deserialize};
 use serde;
 
-#[derive(Deserialize, Clone, Debug)]
+#[derive(Deserialize,Serialize, Clone, Debug)]
 pub struct Edge {
 
+    // #[serde(default)]
     pub id: u32,
-    #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+
+    // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     pub is_custom: bool,
 
-    #[serde(default)]
+    // #[serde(default)]
     pub name: String,
+
     #[serde(default)]
     pub custom_name: String,
+
+    // #[serde(default)]
+    pub summary: String,
+
+    // #[serde(default)]
+    pub book_id: u32,
 
     // #[serde(deserialize_with = "string_to_uuid")]
     #[serde(default)]
     pub uuid: Uuid,
 
-    #[serde(default)]
+    // #[serde(default)]
     pub created_on: Option<DateTime<Utc>>,
-    #[serde(default)]
+
+    // #[serde(default)]
     pub updated_on: Option<DateTime<Utc>>,
-    #[serde(default)]
+
+    // #[serde(default)]
     pub deleted_on: Option<DateTime<Utc>>,
-    #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+
+    // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     pub deleted: bool,
 
+    // #[serde(default)]
+    pub created_by: u32,
+
+    // #[serde(default)]
+    pub updated_by: u32,
+
+    // #[serde(default)]
+    pub deleted_by: u32,
 }
 
 impl Edge {
@@ -43,14 +64,20 @@ impl Edge {
         //use the . operator to fetch the value of a field via the self keyword
         Edge{
             id: 0,
+            book_id: 0,
             is_custom: false,
             name: "".to_owned(),
+            summary: "".to_owned(),
             custom_name: "".to_owned(),
             uuid: Uuid::new_v4(),
             created_on: None,
             updated_on: None,
             deleted_on: None,
             deleted: false,
+
+            created_by: 0,
+            updated_by: 0,
+            deleted_by: 0,
         }
     }
 
@@ -70,50 +97,69 @@ impl Edge {
 }
 
 impl Edge {
-    pub fn import_from_id(
-        &mut self,
-        id: u32,
-        available_data: &JSONChargenData,
-    ) {
+    // pub fn import_from_id(
+    //     &mut self,
+    //     id: u32,
+    //     available_data: &ChargenData,
+    // ) {
 
-        for edge in available_data.edges.iter() {
-            if edge.id == id {
-                self.import_from_definition( edge.id, &edge );
-                return;
-            }
-        }
-    }
+    //     for edge in available_data.edges.iter() {
+    //         if edge.id == id {
+    //             self.import_from_definition( edge.id, &edge );
+    //             return;
+    //         }
+    //     }
+    // }
 
-    pub fn import_from_definition(
-        &mut self,
-        id: u32,
-        def: &JSONEdgeDefinition,
-    ) {
-        self.name = def.name.clone();
-        if id == 0 {
-            self.is_custom = true;
-        } else {
-            self.is_custom = false;
-        }
-        self.id = id;
+    // pub fn import_from_definition(
+    //     &mut self,
+    //     id: u32,
+    //     def: &Edge,
+    // ) {
+    //     self = def.clone();
+    // }
 
-        if !def.created_on.is_empty() {
-            self.created_on = Some(DateTime::from_utc(DateTime::parse_from_rfc3339( &def.created_on ).unwrap().naive_utc(), Utc));
-        }
-        if !def.updated_on.is_empty() {
-            self.updated_on = Some(DateTime::from_utc(DateTime::parse_from_rfc3339( &def.updated_on ).unwrap().naive_utc(), Utc));
-        }
-        if !def.deleted_on.is_empty() {
-            self.deleted_on = Some(DateTime::from_utc(DateTime::parse_from_rfc3339( &def.deleted_on ).unwrap().naive_utc(), Utc));
-        }
-    }
 
     pub fn import_vars(
         &mut self,
-        vars: &JSONEdgeVars,
+        vars_option: &Option<EdgeVars>,
     ) {
-        self.uuid = Uuid::parse_str( &vars.uuid ).unwrap();
-        self.custom_name = vars.custom_name.clone();
+        match vars_option {
+            Some( vars ) => {
+                self.uuid = Uuid::parse_str( &vars.uuid ).unwrap();
+                self.custom_name = vars.custom_name.clone();
+            }
+            None => {}
+        }
+
     }
 
+}
+
+
+#[derive(Deserialize, Serialize, Clone, Debug)]
+pub struct EdgeVars {
+    #[serde(default)]
+    pub custom_name: String,
+    #[serde(default)]
+    pub uuid: String,
+}
+
+#[derive(Deserialize, Serialize, Clone, Debug)]
+pub struct EdgeCombo {
+    pub id: u32,
+    #[serde(default, alias = "edgeOptions")]
+    pub options: Option<EdgeVars>,
+    #[serde(default)]
+    pub def: Option<Edge>,
+}
+
+impl Default for EdgeCombo {
+    fn default() -> Self {
+        EdgeCombo {
+            id: 0,
+            options: None,
+            def: None,
+        }
+    }
 }

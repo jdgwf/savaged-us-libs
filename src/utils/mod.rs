@@ -62,39 +62,12 @@ where
 
 }
 
-// pub fn uuid_to_string<'se, S>(serializer: S) -> Result<String, D::Error>
-// where
-//     S: Serializer<'se>,
-// {
-//     match Uuid::serialize(serializer)? {
 
-//         val => {
-//             let moo = val.to_string();
-
-//             return Ok( moo );
-//         },
-//     }
-
-// }
-// fn uuid_to_string<S>(x: &f32, s: S) -> Result<S::Ok, S::Error>
-// where
-//     S: Serializer,
-// {
-//     s.to_string()
-// }
-
-// pub fn string_to_uuid<'de, D>(deserializer: D) -> Result<Uuid, D::Error>
-// where
-//     D: Deserializer<'de>,
-// {
-//     match String::deserialize(deserializer)? {
-
-//         val => {
-//             let moo = Uuid::parse_str( &val ).unwrap();
-
-//             return Ok( moo );
-//         },
-
-//     }
-
-// }
+pub fn deserialize_null_default<'de, D, T>(deserializer: D) -> Result<T, D::Error>
+where
+    T: Default + Deserialize<'de>,
+    D: Deserializer<'de>,
+{
+    let opt = Option::deserialize(deserializer)?;
+    Ok(opt.unwrap_or_default())
+}

@@ -1,11 +1,15 @@
 use serde::{Serialize, Deserialize};
-use super::json_chargen_edge::JSONEdgeCombo;
-use super::json_chargen_hindrance::JSONHindranceDefinition;
-use super::json_chargen_setting::JSONSettingDefinition;
+use crate::player_character::edge::EdgeCombo;
+use crate::player_character::hindrance::HindranceCombo;
+use crate::setting::Setting;
+
+// use super::json_chargen_edge::EdgeCombo;
+// use super::json_chargen_hindrance::HindranceDefinition;
+// use super::json_chargen_setting::SettingDefinition;
 use super::super::utils::bool_from_int_or_bool;
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct JSONBaseAttributes {
+pub struct BaseAttributes {
     pub agility: u8,
     pub smarts: u8,
     pub spirit: u8,
@@ -14,17 +18,17 @@ pub struct JSONBaseAttributes {
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct JSONRaceOptions {
-    pub chosen_race_abilities: Vec<JSONChargenRaceAbility>,
+pub struct RaceOptions {
+    pub chosen_race_abilities: Vec<ChargenRaceAbility>,
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct JSONChargenRaceAbility {
-    pub adjusted_value: i64,
+pub struct ChargenRaceAbility {
+    pub adjusted_value: u32,
     pub custom_effects: Vec<String>,
     pub custom_name: String,
     pub custom_summary: String,
-    pub custom_value: i64,
+    pub custom_value: u32,
     pub effects: Vec<String>,
     pub max: String,
     #[serde(default, deserialize_with = "bool_from_int_or_bool")]
@@ -53,16 +57,16 @@ pub struct JSONChargenRaceAbility {
     pub selected_trait: String,
     pub selected_trait_specify: String,
     // pub selected_super_power_2021_options: SuperPower2021ObjectVars,
-    pub selected_super_power_2021: i64,
-    pub selected_super_power: i64,
+    pub selected_super_power_2021: u32,
+    pub selected_super_power: u32,
     // pub selected_super_power_options: SuperPower2014ObjectVars,
-    pub selected_power: i64,
-    pub value: i64,
+    pub selected_power: u32,
+    pub value: u32,
 
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct JSONCharacterExport {
+pub struct CharacterExport {
     #[serde(default)]
     pub id: u32,
 
@@ -71,18 +75,18 @@ pub struct JSONCharacterExport {
 
     #[serde(default)]
     pub last_save_id: i64,
-    // pub race_choices: JSONRaceOptions,
+    // pub race_choices: RaceOptions,
 
-    pub attribute_assignments: JSONBaseAttributes,
+    pub attribute_assignments: BaseAttributes,
     #[serde(default)]
     pub version: f64,
     #[serde(default)]
     pub session_id: u32,
 
-    pub edges: Vec<JSONEdgeCombo>,
-    // pub hindrances: Vec<JSONHindranceDefinition>,
+    pub edges: Vec<EdgeCombo>,
+    pub hindrances: Vec<HindranceCombo>,
 
-    pub setting: JSONSettingDefinition,
+    pub setting: Setting,
 
     #[serde(default)]
     pub created_on: String,

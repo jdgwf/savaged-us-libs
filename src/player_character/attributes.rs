@@ -1,6 +1,8 @@
 use crate::utils::get_dice_value::get_dice_value;
+use serde::{Serialize, Deserialize};
+use serde;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Deserialize,Serialize, Clone, Debug)]
 pub struct Attributes {
 
     pub selected_agility: u8,

@@ -3,32 +3,25 @@ pub mod edge;
 pub mod hindrance;
 pub mod exports;
 pub mod imports;
-
-use crate::json_data;
+pub mod chargen_data;
+pub mod character_export;
 
 use uuid::{Uuid};
 use attributes::Attributes;
 use edge::Edge;
-use crate::setting::Setting;
+use crate::{setting::Setting, book::Book};
 use hindrance::Hindrance;
 use chrono::prelude::*;
-use json_data::json_chargen_data::JSONChargenData;
-use json_data::json_chargen_book::JSONBookDefinition;
-use json_data::json_chargen_edge::JSONEdgeDefinition;
-use json_data::json_chargen_hindrance::JSONHindranceDefinition;
-use json_data::json_chargen_weapon::JSONWeaponDefinition;
-use json_data::json_chargen_armor::JSONArmorDefinition;
-use json_data::json_chargen_gear::JSONGearDefinition;
-use json_data::json_chargen_setting::JSONSettingDefinition;
+use self::chargen_data::ChargenData;
 use serde::{Serialize, Deserialize};
+use serde;
 
-// use std::collections::HashMap;
-
-#[derive(Clone)]
+#[derive(Deserialize,Serialize, Clone, Debug)]
 pub struct PlayerCharacter {
 
     pub name: String,
 
+    #[serde(default)]
     pub uuid: Uuid,
 
     pub attributes: Attributes,
@@ -47,7 +40,7 @@ pub struct PlayerCharacter {
 
     pub setting: Setting,
 
-    available_data: JSONChargenData,
+    available_data: ChargenData,
 }
 
 impl PlayerCharacter {
@@ -85,7 +78,7 @@ impl PlayerCharacter {
 impl PlayerCharacter {
 
     pub fn new(
-        available_data: String,
+        available_data: ChargenData,
     ) -> PlayerCharacter {
         //use the . operator to fetch the value of a field via the self keyword
         let mut pc = PlayerCharacter{
@@ -100,8 +93,8 @@ impl PlayerCharacter {
             updated_on: Some(Utc::now()),
             deleted_on: Some(Utc::now()),
             deleted: false,
-            available_data: serde_json::from_str(&available_data).unwrap(),
-            setting: Setting::new(available_data),
+            available_data: available_data.clone(),
+            setting: Setting::new(available_data.clone()),
         };
 
         pc.calc();
@@ -137,35 +130,35 @@ impl PlayerCharacter {
         serde_json::to_string( &self.available_data.edges ).unwrap()
     }
 
-    pub fn get_available_weapons_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.weapons ).unwrap()
-    }
-    pub fn get_available_armor_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.armor ).unwrap()
-    }
-    pub fn get_available_gear_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.gear ).unwrap()
-    }
+    // pub fn get_available_weapons_json( &self ) -> String {
+    //     serde_json::to_string( &self.available_data.weapons ).unwrap()
+    // }
+    // pub fn get_available_armor_json( &self ) -> String {
+    //     serde_json::to_string( &self.available_data.armor ).unwrap()
+    // }
+    // pub fn get_available_gear_json( &self ) -> String {
+    //     serde_json::to_string( &self.available_data.gear ).unwrap()
+    // }
 
-    pub fn get_available_settings_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.settings ).unwrap()
-    }
+    // pub fn get_available_settings_json( &self ) -> String {
+    //     serde_json::to_string( &self.available_data.settings ).unwrap()
+    // }
 
-    pub fn get_available_hindrances_count( &self ) -> usize {
-        self.available_data.hindrances.len()
-    }
+    // pub fn get_available_hindrances_count( &self ) -> usize {
+    //     self.available_data.hindrances.len()
+    // }
 
-    pub fn get_available_weapon_count( &self ) -> usize {
-        self.available_data.weapons.len()
-    }
+    // pub fn get_available_weapon_count( &self ) -> usize {
+    //     self.available_data.weapons.len()
+    // }
 
-    pub fn get_available_armor_count( &self ) -> usize {
-        self.available_data.armor.len()
-    }
+    // pub fn get_available_armor_count( &self ) -> usize {
+    //     self.available_data.armor.len()
+    // }
 
-    pub fn get_available_gear_count( &self ) -> usize {
-        self.available_data.gear.len()
-    }
+    // pub fn get_available_gear_count( &self ) -> usize {
+    //     self.available_data.gear.len()
+    // }
     //
     // pub fn created_on( &self ) -> DateTime<Utc> {
     //     self.created_on.clone()
@@ -181,23 +174,23 @@ impl PlayerCharacter {
     //     self.deleted_on.clone()
     // }
 
-    pub fn set_uuid( &mut self, new_value: String) {
-        // self.uuid = uuid!( new_value[..] );
-        self.uuid = Uuid::parse_str( &new_value ).unwrap();
-    }
+    // pub fn set_uuid( &mut self, new_value: String) {
+    //     // self.uuid = uuid!( new_value[..] );
+    //     self.uuid = Uuid::parse_str( &new_value ).unwrap();
+    // }
 
-    pub fn uuid( &self ) -> String {
-        self.uuid.to_string()
-    }
+    // pub fn uuid( &self ) -> String {
+    //     self.uuid.to_string()
+    // }
 
-    pub fn attributes( &self ) -> Attributes {
-        self.attributes.clone()
-    }
+    // pub fn attributes( &self ) -> Attributes {
+    //     self.attributes.clone()
+    // }
 
-    pub fn set_attributes( &mut self, new_value: Attributes) {
-        // self.uuid = uuid!( new_value[..] );
-        self.attributes = new_value.clone();
-    }
+    // pub fn set_attributes( &mut self, new_value: Attributes) {
+    //     // self.uuid = uuid!( new_value[..] );
+    //     self.attributes = new_value.clone();
+    // }
 
     pub fn reset( &mut self ) {
         self.name = "".to_owned();
@@ -214,33 +207,33 @@ impl PlayerCharacter {
 // non WASM functions
 impl PlayerCharacter {
 
-    pub fn get_available_books( &self ) -> &Vec< JSONBookDefinition > {
+    pub fn get_available_books( &self ) -> &Vec< Book > {
         &self.available_data.books
     }
 
-    pub fn get_available_hindrances( &self ) -> &Vec< JSONHindranceDefinition > {
+    pub fn get_available_hindrances( &self ) -> &Vec< Hindrance > {
         &self.available_data.hindrances
     }
 
-    pub fn get_available_edges( &self ) -> &Vec< JSONEdgeDefinition > {
+    pub fn get_available_edges( &self ) -> &Vec< Edge > {
         &self.available_data.edges
     }
 
-    pub fn get_available_weapons( &self ) -> &Vec< JSONWeaponDefinition > {
-        &self.available_data.weapons
-    }
+    // pub fn get_available_weapons( &self ) -> &Vec< JSONWeaponDefinition > {
+    //     &self.available_data.weapons
+    // }
 
-    pub fn get_available_armor( &self ) -> &Vec< JSONArmorDefinition > {
-        &self.available_data.armor
-    }
+    // pub fn get_available_armor( &self ) -> &Vec< JSONArmorDefinition > {
+    //     &self.available_data.armor
+    // }
 
-    pub fn get_available_gear( &self ) -> &Vec< JSONGearDefinition > {
-        &self.available_data.gear
-    }
+    // pub fn get_available_gear( &self ) -> &Vec< JSONGearDefinition > {
+    //     &self.available_data.gear
+    // }
 
-    pub fn get_available_settings( &self ) -> &Vec< JSONSettingDefinition > {
-        &self.available_data.settings
-    }
+    // pub fn get_available_settings( &self ) -> &Vec< JSONSettingDefinition > {
+    //     &self.available_data.settings
+    // }
 }
 
 // setting data functions
