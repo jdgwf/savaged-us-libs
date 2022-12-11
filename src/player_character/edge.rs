@@ -11,7 +11,7 @@ use super::chargen_data::ChargenData;
 use serde::{Serialize, Deserialize};
 use serde;
 
-#[derive(Deserialize,Serialize, Clone, Debug)]
+#[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
 pub struct Edge {
 
     // #[serde(default)]

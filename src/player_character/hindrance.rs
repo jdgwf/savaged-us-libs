@@ -5,7 +5,7 @@ use super::super::utils::bool_from_int_or_bool;
 // use super::super::utils::string_to_uuid;
 use serde::{Serialize, Deserialize};
 
-#[derive(Deserialize, Serialize, Clone, Debug)]
+#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Hindrance {
     // #[serde(default)]
     pub name: String,

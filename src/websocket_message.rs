@@ -1,6 +1,8 @@
 use serde;
 use serde::{Serialize, Deserialize};
 
+use chrono::prelude::*;
+
 use crate::player_character::chargen_data::ChargenData;
 use crate::public_user_info::PublicUserInfo;
 use crate::save_db_row::SaveDBRow;
@@ -20,6 +22,7 @@ pub struct WebSocketMessage {
     pub kind: WebsocketMessageType,
     pub user: Option<User>,
     pub payload: Option<String>,
+    pub updated_on: Option<DateTime<Utc>>,
     pub chargen_data: Option<ChargenData>,
     pub saves: Option<Vec<SaveDBRow>>,
 }
