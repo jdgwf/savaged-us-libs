@@ -164,9 +164,11 @@ impl User {
 
             let now = chrono::offset::Utc::now();
             let mut image_timestamp = now.timestamp();
+
+
             match self.updated_on {
                 Some( date ) => {
-                    image_timestamp = date.timestamp()
+                    image_timestamp = date.timestamp();
                 }
                 None => {
 

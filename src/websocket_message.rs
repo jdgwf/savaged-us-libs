@@ -25,4 +25,20 @@ pub struct WebSocketMessage {
     pub updated_on: Option<DateTime<Utc>>,
     pub chargen_data: Option<ChargenData>,
     pub saves: Option<Vec<SaveDBRow>>,
+    pub include_saves: bool,
+}
+
+impl Default for WebSocketMessage {
+    fn default() -> Self {
+        WebSocketMessage {
+            kind: WebsocketMessageType::Saves,
+            token: None,
+            user: None,
+            payload: None,
+            updated_on: None,
+            chargen_data: None,
+            saves: None,
+            include_saves: false,
+        }
+    }
 }
