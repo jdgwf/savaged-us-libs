@@ -15,8 +15,10 @@ pub struct Book {
     // #[serde(default)]
     pub name: String,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub image: String,
+
+    #[serde(default)]
     pub logo: String,
 
     // #[serde(default)]
@@ -29,6 +31,8 @@ pub struct Book {
     pub active: bool,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+
+    #[serde(default)]
     pub deleted: bool,
 
     // #[serde(default)]

@@ -6,7 +6,7 @@ use super::utils::bool_from_int_or_bool;
 use super::utils::deserialize_null_default;
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct SaveDBRow {
-    pub id: i64,
+    pub id: u32,
 
     // #[serde(default)]
     // pub session_id: i64,
@@ -15,6 +15,9 @@ pub struct SaveDBRow {
     pub name: String,
 
     pub sort_order: i64,
+
+    #[serde(default)]
+    pub uuid: String,
 
     #[serde(default)]
     pub save_type: String,

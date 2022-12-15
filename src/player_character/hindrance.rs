@@ -13,7 +13,7 @@ pub struct Hindrance {
     // #[serde(default)]
     pub summary: String,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub id: u32,
 
     pub book_id: u32,
@@ -23,6 +23,7 @@ pub struct Hindrance {
     pub uuid: Uuid,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+    #[serde(default)]
     pub is_custom: bool,
 
     // #[serde(default)]
@@ -41,16 +42,17 @@ pub struct Hindrance {
     pub deleted_on:  Option<DateTime<Utc>>,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+    #[serde(default)]
     pub deleted: bool,
 
 
-    // #[serde(default)]
+    #[serde(default)]
     pub created_by: u32,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub updated_by: u32,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub deleted_by: u32,
 }
 
