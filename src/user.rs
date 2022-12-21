@@ -174,7 +174,7 @@ impl User {
 
                 }
             }
-            let image_url = base_url.to_owned() + &format!("/data-images/user/{}.{}?u={}", self.id, self.profile_image, image_timestamp );
+            let image_url = base_url.to_owned() + &format!("/data-images/users/{}.{}?u={}", self.id, self.profile_image, image_timestamp );
             return image_url.to_owned();
         }
     }

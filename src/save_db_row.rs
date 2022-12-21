@@ -4,17 +4,18 @@ use chrono::prelude::*;
 
 use super::utils::bool_from_int_or_bool;
 use super::utils::deserialize_null_default;
+
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct SaveDBRow {
     pub id: u32,
 
     // #[serde(default)]
-    // pub session_id: i64,
+    // pub session_id: u32,
 
     #[serde(default, deserialize_with = "deserialize_null_default")]
     pub name: String,
 
-    pub sort_order: i64,
+    pub sort_order: i32,
 
     #[serde(default)]
     pub uuid: String,
@@ -46,28 +47,28 @@ pub struct SaveDBRow {
     // #[serde(default)]
     pub folder: String,
 
-    pub created_by: i64,
+    pub created_by: u32,
 
     pub rifts_living_campaign: bool,
 
-    pub updated_by: i64,
+    pub updated_by: u32,
 
     // #[serde(default)]
     pub share_html: String,
 
-    pub hits: i64,
-    pub total_hits: i64,
+    pub hits: u32,
+    pub total_hits: u32,
 
     #[serde(default)]
     pub data: String,
 
-    pub deleted_by: i64,
+    pub deleted_by: u32,
 
     pub show_character_sheet: bool,
     pub allow_download: bool,
 
-    pub session_id: i64,
-    pub co_owner: i64,
+    pub session_id: u32,
+    pub co_owner: u32,
     // #[serde(default)]
     pub co_owner_folder: String,
     // co_owner_public: IPublicUserInfo,
