@@ -14,6 +14,7 @@ pub enum WebsocketMessageType {
     Offline = 2,
     ChargenData = 3,
     Saves = 4,
+    Logout = 5,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]

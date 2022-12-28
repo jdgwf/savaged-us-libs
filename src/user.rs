@@ -364,4 +364,6 @@ pub struct LoginToken {
     pub browser: String,
     pub token: String,
     pub last_seen_ip: String,
+    #[serde(default)]
+    pub logged_out: bool,
 }
