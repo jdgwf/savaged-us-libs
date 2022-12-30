@@ -186,11 +186,20 @@ impl User {
         return ( export_name ).trim().to_owned()
     }
 
+    fn get_timezone(&self) -> String {
+        if self.timezone.is_empty() {
+            "America/Chicago".to_owned()
+        } else {
+            self.timezone.clone()
+        }
+
+    }
+
     pub fn format_date(
         &self,
         incoming_date: DateTime<Utc>,
     ) -> String {
-        let tz: Tz = self.timezone.parse().unwrap();
+        let tz: Tz = self.get_timezone().parse().unwrap();
         let shifted = incoming_date.with_timezone(&tz);
 
         return shifted.format("%m/%d/%Y %H:%M:%S").to_string();
@@ -203,7 +212,7 @@ impl User {
         with_am_pm: bool,
         with_timezone: bool,
     ) -> String {
-        let tz: Tz = self.timezone.parse().unwrap();
+        let tz: Tz = self.get_timezone().parse().unwrap();
         let shifted = incoming_date.with_timezone(&tz);
 
         let mut format_string ="%H:%M".to_owned();
@@ -235,7 +244,7 @@ impl User {
         with_am_pm: bool,
         with_timezone: bool,
     ) -> String {
-        let tz: Tz = self.timezone.parse().unwrap();
+        let tz: Tz = self.get_timezone().parse().unwrap();
         let shifted = incoming_date.with_timezone(&tz);
 
         let mut format_string ="%m/%d/%Y %H:%M".to_owned();

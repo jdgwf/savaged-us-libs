@@ -79,7 +79,7 @@ pub struct SaveDBRow {
     pub updated_on: Option<DateTime<Utc>>,
     #[serde(default)]
     pub deleted_on: Option<DateTime<Utc>>,
-    #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+    #[serde(default)]
     pub deleted: bool,
 
     pub created_by_public: Option<PublicUserInfo>,
