@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
+use serde::{Serialize, Deserialize, Deserializer};
 use chrono::prelude::*;
 use chrono_tz::Tz;
-
+use serde_json;
 use crate::public_user_info::PublicUserInfo;
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -52,6 +52,7 @@ pub struct User {
     // pub reset_password_link: String,
     // pub saves: Vec<Saves>,
 
+    #[serde(default, deserialize_with = "_json_array_to_newline_string")]
     pub share_bio: String,
     pub share_display_name: String,
     pub share_show_profile_image: bool,
@@ -375,4 +376,37 @@ pub struct LoginToken {
     pub last_seen_ip: String,
     #[serde(default)]
     pub logged_out: bool,
+}
+
+
+fn _json_array_to_newline_string<'de, D>(deserializer: D) -> Result<String, D::Error>
+where
+    D: Deserializer<'de>,
+{
+
+    match String::deserialize(deserializer) {
+
+        Ok( val ) => {
+            if val.starts_with("[\"") {
+                let arr_result: Result<Vec<String>, serde_json::Error> = serde_json::from_str(val.as_str());
+                match arr_result {
+                    Ok( arr ) => {
+                        let joined = arr.join("\n");
+                        return Ok(joined);
+                    }
+                    Err(_err) => {
+                        return Ok("".to_owned());
+                    }
+                }
+            } else {
+                return Ok(val);
+            }
+        }
+
+        Err( _err) => {
+            return Ok("".to_owned());
+        }
+
+    }
+
 }
