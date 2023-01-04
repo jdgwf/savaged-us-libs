@@ -38,6 +38,16 @@ pub struct SaveDBRow {
     pub share_public: bool ,
     pub share_copy: bool,
 
+    #[serde(default)]
+    pub image_base64: Option<String>,
+    #[serde(default)]
+    pub image_token_base64: Option<String>,
+
+    #[serde(default)]
+    pub image_base64_mime: Option<String>,
+    #[serde(default)]
+    pub image_token_base64_mime: Option<String>,
+
     // #[serde(default)]
     pub imageurl: String,
     // #[serde(default)]
