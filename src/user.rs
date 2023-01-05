@@ -360,6 +360,13 @@ pub struct UserUpdateResult {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub struct ImageUpdateResult {
+    pub success: bool,
+    pub image_url: String,
+    pub message: String,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct UserGroup {
     pub id: u32,
     pub name: String,
