@@ -1,5 +1,5 @@
 use uuid::{Uuid};
-use crate::{player_character::PlayerCharacter};
+use crate::{player_character::PlayerCharacter, utils::array_to_string};
 use chrono::prelude::*;
 // use super::super::utils::bool_from_int_or_bool;
 // use super::super::utils::string_to_uuid;
@@ -12,6 +12,9 @@ pub struct Hindrance {
 
     // #[serde(default)]
     pub summary: String,
+
+    #[serde(default, deserialize_with = "array_to_string")]
+    pub description: String,
 
     #[serde(default)]
     pub id: u32,
@@ -63,6 +66,7 @@ impl Hindrance {
         Hindrance{
             name: "".to_owned(),
             summary: "".to_owned(),
+            description: "".to_owned(),
             uuid: Uuid::new_v4(),
             created_on: None,
             id: 0,

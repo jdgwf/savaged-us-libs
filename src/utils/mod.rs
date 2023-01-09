@@ -39,7 +39,7 @@ where
             }
         }
 
-        Err(err) => {
+        Err(_err) => {
             return Ok(false);
         }
 
@@ -70,4 +70,22 @@ where
 {
     let opt = Option::deserialize(deserializer)?;
     Ok(opt.unwrap_or_default())
+}
+
+
+pub fn array_to_string<'de, D>(deserializer: D) -> Result<String, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    match String::deserialize(deserializer) {
+
+        Ok( val ) => {
+            return Ok(val);
+        }
+        Err( _err ) => {
+
+        }
+    }
+    return Ok("".to_string());
+
 }

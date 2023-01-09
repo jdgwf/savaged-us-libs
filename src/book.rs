@@ -60,7 +60,7 @@ pub struct Book {
     pub version_of: u32,
 
     // #[serde(default)]
-    pub description: Vec<String>,
+    pub description: String,
 
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
@@ -100,7 +100,7 @@ impl Default for Book {
             updated_by: 0,
             updated_on: None,
             version_of: 0,
-            description: Vec::new(),
+            description:  "".to_owned(),
 
             access_registered: false,
             access_wildcard: false,

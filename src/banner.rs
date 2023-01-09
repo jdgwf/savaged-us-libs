@@ -39,7 +39,7 @@ pub struct Banner {
     #[serde(default)]
     pub updated_on: Option<DateTime<Utc>>,
     pub version_of: u32,
-    pub description: Vec<String>,
+    pub description: String,
 
     #[serde(deserialize_with = "float_to_int",default)]
     pub impressions: u32,
@@ -75,7 +75,7 @@ impl Default for Banner {
             updated_by: 0,
             updated_on: None,
             version_of: 0,
-            description: Vec::new(),
+            description:  "".to_owned(),
             impressions: 0,
             name_plural: "".to_owned(),
             prevent_hiding: false,
