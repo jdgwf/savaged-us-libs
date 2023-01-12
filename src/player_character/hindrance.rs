@@ -57,6 +57,32 @@ pub struct Hindrance {
 
     #[serde(default)]
     pub deleted_by: u32,
+
+
+
+    pub base_name: String,
+    pub no_select: bool,
+    pub hidden_on_character_sheet: bool,
+
+    // custom_name: String,
+    // uuid: String,
+
+    pub setting_item: bool,
+    pub counts_as_other: Vec<String>,
+    pub major: bool,
+    pub minor_or_major: bool,
+    pub summary_minor: String,
+    pub effects_minor: Vec<String>,
+
+    pub conflicts: Vec<String>,
+    pub needs_to_specify: bool,
+    pub always_show_long_name: bool,
+    pub can_be_taken_more_than_once: bool,
+
+    pub removed: bool,
+    // description: Vec<String>,
+
+    pub specify: Option<String>,
 }
 
 impl Hindrance {
@@ -81,6 +107,25 @@ impl Hindrance {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+
+            base_name: "".to_owned(),
+            no_select: false,
+            hidden_on_character_sheet: false,
+
+            setting_item: false,
+            counts_as_other: Vec::new(),
+            major: false,
+            minor_or_major: false,
+            summary_minor: "".to_owned(),
+            effects_minor: Vec::new(),
+
+            conflicts: Vec::new(),
+            needs_to_specify: false,
+            always_show_long_name: false,
+            can_be_taken_more_than_once: false,
+
+            removed: false,
+            specify: None,
         }
     }
     pub fn apply( mut char_obj: &PlayerCharacter ) {

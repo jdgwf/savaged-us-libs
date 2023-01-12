@@ -308,6 +308,21 @@ impl User {
         return false;
     }
 
+    pub fn get_admin_name(&self) -> String {
+        if !self.first_name.is_empty() && !self.last_name.is_empty() {
+            return (self.last_name.to_owned() + &", " + &self.first_name).to_owned();
+        } else {
+            if !self.first_name.is_empty() {
+                return  self.first_name.to_owned();
+            } else {
+                if !self.last_name.is_empty() {
+                    return  self.last_name.to_owned();
+                }
+            }
+        }
+        return "(no name)".to_owned();
+    }
+
     pub fn get_display_name(&self) -> String {
         if self.share_display_name.is_empty() {
             self.share_display_name.to_owned()
