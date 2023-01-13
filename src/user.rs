@@ -323,18 +323,29 @@ impl User {
         return "(no name)".to_owned();
     }
 
-    pub fn get_display_name(&self) -> String {
-        if !self.share_display_name.is_empty() {
-            self.share_display_name.to_owned()
+    pub fn get_display_name(
+        &self,
+        for_admin: bool,
+    ) -> String {
+        if for_admin {
+            self.last_name.to_owned() + &", " + &self.first_name
         } else {
-            self.username.to_owned()
+            if !self.share_display_name.is_empty() {
+                self.share_display_name.to_owned()
+            } else {
+                self.username.to_owned()
+            }
         }
+
     }
 
-    pub fn get_public_info(&self) -> PublicUserInfo {
+    pub fn get_public_info(
+        &self,
+        for_admin: bool,
+    ) -> PublicUserInfo {
         PublicUserInfo {
             username: self.username.to_owned(),
-            name: self.get_display_name(),
+            name: self.get_display_name(for_admin),
             twitter: self.twitter.to_owned(),
             image: self.image_url.to_owned(),
             user_type: "".to_owned(),

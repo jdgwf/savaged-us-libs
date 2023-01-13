@@ -15,6 +15,9 @@ pub struct Book {
     // #[serde(default)]
     pub name: String,
 
+    // #[serde(default)]
+    pub short_name: String,
+
     #[serde(default)]
     pub image: String,
 
@@ -31,6 +34,10 @@ pub struct Book {
     pub active: bool,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
+    #[serde(default)]
+    pub core: bool,
+    #[serde(default)]
+    pub primary: bool,
 
     #[serde(default)]
     pub deleted: bool,
@@ -82,6 +89,7 @@ impl Default for Book {
             id: 0,
 
             name: "".to_owned(),
+            short_name: "".to_owned(),
 
             image: "".to_owned(),
             logo: "".to_owned(),
@@ -89,6 +97,9 @@ impl Default for Book {
             publisher: "".to_owned(),
             published: "".to_owned(),
             active: false,
+
+            primary: false,
+            core: false,
 
             deleted: false,
             summary: "".to_owned(),

@@ -50,11 +50,11 @@ impl GameData {
         match item_result {
             Ok( mut item ) => {
 
-
                 item.book_name = self.book_name.clone();
                 item.book_short_name = self.book_short_name.clone();
 
                 item.id = self.id;
+                item.active = self.active;
                 item.created_by = self.created_by;
                 item.deleted_by = self.deleted_by;
                 item.updated_by = self.updated_by;

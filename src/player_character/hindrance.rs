@@ -92,6 +92,9 @@ pub struct Hindrance {
     pub setting_item: bool,
 
     #[serde(default)]
+    pub active: bool,
+
+    #[serde(default)]
     pub counts_as_other: Vec<String>,
 
     #[serde(default)]
@@ -138,6 +141,8 @@ impl Hindrance {
             is_custom: false,
             deleted_on: None,
             deleted: false,
+
+            active: false,
 
             created_by: 0,
             updated_by: 0,
