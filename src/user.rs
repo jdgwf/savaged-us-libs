@@ -324,7 +324,7 @@ impl User {
     }
 
     pub fn get_display_name(&self) -> String {
-        if self.share_display_name.is_empty() {
+        if !self.share_display_name.is_empty() {
             self.share_display_name.to_owned()
         } else {
             self.username.to_owned()
@@ -337,7 +337,7 @@ impl User {
             name: self.get_display_name(),
             twitter: self.twitter.to_owned(),
             image: self.image_url.to_owned(),
-            r#type: "".to_owned(),
+            user_type: "".to_owned(),
             page: "".to_owned(),
             banned: false,
             banned_reason: "".to_owned(),

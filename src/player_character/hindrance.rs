@@ -1,5 +1,5 @@
 use uuid::{Uuid};
-use crate::{player_character::PlayerCharacter, utils::array_to_string};
+use crate::{player_character::PlayerCharacter, utils::array_to_string, public_user_info::PublicUserInfo};
 use chrono::prelude::*;
 // use super::super::utils::bool_from_int_or_bool;
 // use super::super::utils::string_to_uuid;
@@ -10,15 +10,22 @@ pub struct Hindrance {
     // #[serde(default)]
     pub name: String,
 
-    // #[serde(default)]
+    #[serde(default)]
+    pub book_name: Option<String>,
+
+    #[serde(default)]
+    pub book_short_name: Option<String>,
+
+    #[serde(default)]
     pub summary: String,
 
-    #[serde(default, deserialize_with = "array_to_string")]
+    #[serde(default)]
     pub description: String,
 
     #[serde(default)]
     pub id: u32,
 
+    #[serde(default)]
     pub book_id: u32,
 
     // #[serde(deserialize_with = "string_to_uuid")]
@@ -29,19 +36,22 @@ pub struct Hindrance {
     #[serde(default)]
     pub is_custom: bool,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub effects: Vec<String>,
 
     #[serde(default)]
     pub custom_name: String,
 
     // #[serde(default)]
+    #[serde(default)]
     pub created_on:  Option<DateTime<Utc>>,
 
     // #[serde(default)]
+    #[serde(default)]
     pub updated_on:  Option<DateTime<Utc>>,
 
     // #[serde(default)]
+    #[serde(default)]
     pub deleted_on:  Option<DateTime<Utc>>,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
@@ -58,30 +68,53 @@ pub struct Hindrance {
     #[serde(default)]
     pub deleted_by: u32,
 
+    #[serde(default)]
+    pub created_by_obj: Option<PublicUserInfo>,
 
+    #[serde(default)]
+    pub updated_by_obj: Option<PublicUserInfo>,
 
+    #[serde(default)]
+    pub deleted_by_obj: Option<PublicUserInfo>,
+
+    #[serde(default)]
     pub base_name: String,
+
+    #[serde(default)]
     pub no_select: bool,
+
+    #[serde(default)]
     pub hidden_on_character_sheet: bool,
 
     // custom_name: String,
     // uuid: String,
-
+    #[serde(default)]
     pub setting_item: bool,
+
+    #[serde(default)]
     pub counts_as_other: Vec<String>,
+
+    #[serde(default)]
     pub major: bool,
+
+    #[serde(default)]
     pub minor_or_major: bool,
+    #[serde(default)]
     pub summary_minor: String,
+    #[serde(default)]
     pub effects_minor: Vec<String>,
-
+    #[serde(default)]
     pub conflicts: Vec<String>,
+    #[serde(default)]
     pub needs_to_specify: bool,
+    #[serde(default)]
     pub always_show_long_name: bool,
+    #[serde(default)]
     pub can_be_taken_more_than_once: bool,
-
+    #[serde(default)]
     pub removed: bool,
     // description: Vec<String>,
-
+    #[serde(default)]
     pub specify: Option<String>,
 }
 
@@ -95,6 +128,8 @@ impl Hindrance {
             description: "".to_owned(),
             uuid: Uuid::new_v4(),
             created_on: None,
+            book_name: None,
+            book_short_name: None,
             id: 0,
             book_id: 0,
             effects: Vec::new(),
@@ -126,6 +161,10 @@ impl Hindrance {
 
             removed: false,
             specify: None,
+
+            created_by_obj: None,
+            deleted_by_obj: None,
+            updated_by_obj: None,
         }
     }
     pub fn apply( mut char_obj: &PlayerCharacter ) {
