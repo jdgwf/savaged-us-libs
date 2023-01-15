@@ -62,7 +62,6 @@ where
 
 }
 
-
 pub fn deserialize_null_default<'de, D, T>(deserializer: D) -> Result<T, D::Error>
 where
     T: Default + Deserialize<'de>,
@@ -71,7 +70,6 @@ where
     let opt = Option::deserialize(deserializer)?;
     Ok(opt.unwrap_or_default())
 }
-
 
 pub fn array_to_string<'de, D>(deserializer: D) -> Result<String, D::Error>
 where

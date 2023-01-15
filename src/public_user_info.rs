@@ -28,7 +28,6 @@ pub struct PublicUserInfo {
     pub shared_saves: Vec<String>,
 }
 
-
 impl Default for PublicUserInfo {
     fn default() -> Self {
         PublicUserInfo{

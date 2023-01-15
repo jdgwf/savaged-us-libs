@@ -2,7 +2,7 @@ use serde::{Serialize, Deserialize, Deserializer};
 use chrono::prelude::*;
 use chrono_tz::Tz;
 use serde_json;
-use crate::public_user_info::PublicUserInfo;
+use crate::{public_user_info::PublicUserInfo, book::Book};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct User {
@@ -166,7 +166,6 @@ impl User {
             let now = chrono::offset::Utc::now();
             let mut image_timestamp = now.timestamp();
 
-
             match self.updated_on {
                 Some( date ) => {
                     image_timestamp = date.timestamp();
@@ -277,7 +276,6 @@ impl User {
         return false;
     }
 
-
     pub fn get_real_name(&self) -> String {
         let mut real_name = "".to_string();
 
@@ -363,6 +361,68 @@ impl User {
         }
     }
 
+
+    pub fn admin_can_read_item (
+        &self,
+        _book_list: &Option<Vec<Book>>,
+        _item_created_by: &u32,
+        _item_book_id: &u32,
+    ) -> bool {
+        return true;
+    }
+    pub fn admin_can_write_item (
+        &self,
+        book_list: &Option<Vec<Book>>,
+        item_created_by: &u32,
+        item_book_id: &u32,
+    ) -> bool {
+        if self.has_admin_access() {
+            return true;
+        }
+        return false;
+    }
+    pub fn admin_can_add_item (
+        &self,
+        book_list: &Option<Vec<Book>>,
+        book_id: &u32,
+    ) -> bool {
+        if self.has_admin_access() {
+            return true;
+        }
+        return false;
+    }
+    pub fn admin_can_read_book (
+        &self,
+        book_list: &Option<Vec<Book>>,
+        book_id: &u32,
+    ) -> bool {
+        if self.has_admin_access() {
+            return true;
+        }
+        return false;
+    }
+    pub fn admin_can_write_book (
+        &self,
+        book_list: &Option<Vec<Book>>,
+        book_id: &u32,
+    ) -> bool {
+        if self.has_admin_access() {
+            return true;
+        }
+        return false;
+    }
+    pub fn admin_can_delete_item (
+        &self,
+        book_list: &Option<Vec<Book>>,
+        item_created_by: &u32,
+        item_book_id: &u32,
+    ) -> bool {
+        if self.has_admin_access() {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -410,7 +470,6 @@ pub struct LoginToken {
     #[serde(default)]
     pub logged_out: bool,
 }
-
 
 fn _json_array_to_newline_string<'de, D>(deserializer: D) -> Result<String, D::Error>
 where

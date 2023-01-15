@@ -4,7 +4,6 @@ use serde_json::json;
 
 use crate::player_character::chargen_data::ChargenData;
 
-
 pub async fn get_chargen_data(
     base_url: String,
     api_key: String,
@@ -27,10 +26,8 @@ pub async fn get_chargen_data(
     .await
     .unwrap();
 
-
     // block_on(chargen_data);
     println!("Completed downloading chargen data from {}, decoding json (strlen {})", &base_url, chargen_data.len());
-
 
     let data = serde_json::from_str(&chargen_data).unwrap();
 

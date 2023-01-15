@@ -69,7 +69,6 @@ pub struct Book {
     // #[serde(default)]
     pub description: String,
 
-
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     pub access_registered: bool,
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]

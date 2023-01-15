@@ -28,7 +28,6 @@ pub struct Armor {
     #[serde(default)]
     pub custom_name: String,
 
-
     // #[serde(default, deserialize_with = "array_to_string")]
     // pub description: String,
 
@@ -127,7 +126,6 @@ impl Armor {
     //     self = def.clone();
     // }
 
-
     pub fn import_vars(
         &mut self,
         vars_option: &Option<ArmorVars>,
@@ -143,7 +141,6 @@ impl Armor {
     }
 
 }
-
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct ArmorVars {

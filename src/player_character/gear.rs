@@ -28,7 +28,6 @@ pub struct Gear {
     #[serde(default)]
     pub custom_name: String,
 
-
     // #[serde(default, deserialize_with = "array_to_string")]
     // pub description: String,
 
@@ -127,7 +126,6 @@ impl Gear {
     //     self = def.clone();
     // }
 
-
     pub fn import_vars(
         &mut self,
         vars_option: &Option<GearVars>,
@@ -143,7 +141,6 @@ impl Gear {
     }
 
 }
-
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct GearVars {

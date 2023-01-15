@@ -58,7 +58,6 @@ pub struct Hindrance {
     #[serde(default)]
     pub deleted: bool,
 
-
     #[serde(default)]
     pub created_by: u32,
 
@@ -246,8 +245,6 @@ pub struct HindranceVars {
     pub uuid: String,
 }
 
-
-
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct HindranceCombo {
     pub id: u32,
@@ -256,7 +253,6 @@ pub struct HindranceCombo {
     #[serde(default)]
     pub def: Option<Hindrance>,
 }
-
 
 impl Default for HindranceCombo {
     fn default() -> Self {

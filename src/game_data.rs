@@ -42,7 +42,6 @@ pub struct GameData {
     pub book_short_name: Option<String>,
 }
 
-
 impl GameData {
     pub fn to_hindrance(&self) -> Result<Hindrance, serde_json::Error> {
 

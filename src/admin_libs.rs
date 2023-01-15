@@ -1,5 +1,7 @@
 use serde::{Serialize, Deserialize};
 
+use crate::book::Book;
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct FetchAdminParameters {
     #[serde(default)]
@@ -20,6 +22,10 @@ pub struct FetchAdminParameters {
     pub sort_by: Option<String>,
     #[serde(default)]
     pub sort_by_ascending: bool,
+
+    #[serde(default)]
+    pub needs_book_list: bool,
+
 }
 
 pub fn new_fetch_admin_params() -> FetchAdminParameters {
@@ -33,6 +39,7 @@ pub fn new_fetch_admin_params() -> FetchAdminParameters {
         current_page: 0,
         sort_by: None,
         sort_by_ascending: true,
+        needs_book_list: true,
     }
 
 }
@@ -41,14 +48,6 @@ pub fn new_fetch_admin_params() -> FetchAdminParameters {
 pub struct AdminPagingStatistics {
     pub non_filtered_count: u32,
     pub filtered_count: u32,
-    pub book_list: Vec<BookList>,
+    pub book_list: Option<Vec<Book>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub struct BookList {
-    pub id: u32,
-    pub name: String,
-    pub short_name: String,
-    pub core: bool,
-    pub primary: bool,
-}

@@ -2,7 +2,6 @@ use crate::save_db_row::SaveDBRow;
 // use std::collections::HashMap;
 use serde_json::json;
 
-
 pub async fn get_user_saves(
     base_url: String,
     api_key: String,

@@ -44,7 +44,6 @@ impl Default for WebSocketMessage {
     }
 }
 
-
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct SimpleAPIReturn {
     pub success: bool,

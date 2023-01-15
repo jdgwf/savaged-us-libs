@@ -28,7 +28,6 @@ pub struct Edge {
     #[serde(default)]
     pub custom_name: String,
 
-
     // #[serde(default, deserialize_with = "array_to_string")]
     // pub description: String,
 
@@ -127,7 +126,6 @@ impl Edge {
     //     self = def.clone();
     // }
 
-
     pub fn import_vars(
         &mut self,
         vars_option: &Option<EdgeVars>,
@@ -143,7 +141,6 @@ impl Edge {
     }
 
 }
-
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct EdgeVars {
