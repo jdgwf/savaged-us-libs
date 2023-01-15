@@ -6,7 +6,7 @@ pub mod gear;
 pub mod armor;
 pub mod weapon;
 pub mod imports;
-pub mod chargen_data;
+pub mod game_data_package;
 pub mod character_export;
 
 use uuid::{Uuid};
@@ -15,7 +15,7 @@ use edge::Edge;
 use crate::{setting::Setting, book::Book};
 use hindrance::Hindrance;
 use chrono::prelude::*;
-use self::chargen_data::ChargenData;
+use self::game_data_package::GameDataPackage;
 use serde::{Serialize, Deserialize};
 use serde;
 
@@ -43,7 +43,7 @@ pub struct PlayerCharacter {
 
     pub setting: Setting,
 
-    available_data: ChargenData,
+    available_data: GameDataPackage,
 }
 
 impl PlayerCharacter {
@@ -81,7 +81,7 @@ impl PlayerCharacter {
 impl PlayerCharacter {
 
     pub fn new(
-        available_data: ChargenData,
+        available_data: GameDataPackage,
     ) -> PlayerCharacter {
         //use the . operator to fetch the value of a field via the self keyword
         let mut pc = PlayerCharacter{

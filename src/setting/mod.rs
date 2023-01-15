@@ -5,7 +5,7 @@
 // pub mod exports;
 pub mod imports;
 
-use crate::{player_character::chargen_data::ChargenData};
+use crate::{player_character::game_data_package::GameDataPackage};
 
 use uuid::{Uuid};
 // use attributes::Attributes;
@@ -31,7 +31,7 @@ pub struct Setting {
     pub uuid: Uuid,
 
     // #[serde(skip)]
-    // available_data: ChargenData,
+    // available_data: GameDataPackage,
 }
 
 // WASM Bindgen Getters/Setters
@@ -39,7 +39,7 @@ pub struct Setting {
 impl Setting {
 
     pub fn new(
-        available_data: ChargenData,
+        available_data: GameDataPackage,
     ) -> Setting {
         //use the . operator to fetch the value of a field via the self keyword
         let setting = Setting{
@@ -52,7 +52,7 @@ impl Setting {
     }
 
     pub fn new_import(
-        available_data: ChargenData,
+        available_data: GameDataPackage,
     ) -> Setting {
         //use the . operator to fetch the value of a field via the self keyword
         let setting = Setting{

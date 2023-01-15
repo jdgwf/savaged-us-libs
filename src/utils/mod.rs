@@ -1,6 +1,6 @@
 // use uuid::{Uuid};
 pub mod get_dice_value;
-pub mod get_chargen_data;
+pub mod get_game_data_package;
 pub mod get_user_saves;
 pub mod date_formatting;
 pub mod success_return;

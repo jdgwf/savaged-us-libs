@@ -181,7 +181,7 @@ impl Hindrance {
     //     &mut self,
     //     id: u32,
     //     def: JSONHindranceDefinition,
-    //     available_data: &ChargenData,
+    //     available_data: &GameDataPackage,
     // ) {
 
     //     for hindrance in available_data.hindrances.iter() {

@@ -3,9 +3,6 @@ use crate::player_character::edge::EdgeCombo;
 use crate::player_character::hindrance::HindranceCombo;
 use crate::setting::Setting;
 
-// use super::json_chargen_edge::EdgeCombo;
-// use super::json_chargen_hindrance::HindranceDefinition;
-// use super::json_chargen_setting::SettingDefinition;
 use super::super::utils::bool_from_int_or_bool;
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
@@ -19,11 +16,11 @@ pub struct BaseAttributes {
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct RaceOptions {
-    pub chosen_race_abilities: Vec<ChargenRaceAbility>,
+    pub chosen_race_abilities: Vec<GameDataRaceAbility>,
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct ChargenRaceAbility {
+pub struct GameDataRaceAbility {
     pub adjusted_value: u32,
     pub custom_effects: Vec<String>,
     pub custom_name: String,

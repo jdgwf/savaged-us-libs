@@ -3,7 +3,7 @@ use serde::{Serialize, Deserialize};
 
 use chrono::prelude::*;
 
-use crate::player_character::chargen_data::ChargenData;
+use crate::player_character::game_data_package::GameDataPackage;
 // use crate::public_user_info::PublicUserInfo;
 use crate::save_db_row::SaveDBRow;
 use crate::user::User;
@@ -12,7 +12,7 @@ use crate::user::User;
 pub enum WebsocketMessageType {
     Online = 1,
     Offline = 2,
-    ChargenData = 3,
+    GameDataPackage = 3,
     Saves = 4,
     Logout = 5,
 }
@@ -24,7 +24,7 @@ pub struct WebSocketMessage {
     pub user: Option<User>,
     pub payload: Option<String>,
     pub updated_on: Option<DateTime<Utc>>,
-    pub chargen_data: Option<ChargenData>,
+    pub game_data: Option<GameDataPackage>,
     pub saves: Option<Vec<SaveDBRow>>,
     pub include_saves: bool,
 }
@@ -37,7 +37,7 @@ impl Default for WebSocketMessage {
             user: None,
             payload: None,
             updated_on: None,
-            chargen_data: None,
+            game_data: None,
             saves: None,
             include_saves: false,
         }

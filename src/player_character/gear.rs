@@ -2,12 +2,11 @@ use uuid::{Uuid};
 use crate::player_character::PlayerCharacter;
 use crate::utils::array_to_string;
 // use std::collections::HashMap;
-// use crate::json_data::json_chargen_data::ChargenData;
-// use crate::json_data::json_chargen_gear::JSONGearDefinition;
-// use crate::json_data::json_chargen_gear::JSONGearVars;
+// use crate::json_data::json_game_data::GameDataPackage;
+
 use chrono::prelude::*;
 // use super::super::utils::bool_from_int_or_bool;
-// use super::chargen_data::ChargenData;
+// use super::game_data::GameDataPackage;
 // use super::super::utils::string_to_uuid;
 use serde::{Serialize, Deserialize};
 use serde;
@@ -107,7 +106,7 @@ impl Gear {
     // pub fn import_from_id(
     //     &mut self,
     //     id: u32,
-    //     available_data: &ChargenData,
+    //     available_data: &GameDataPackage,
     // ) {
 
     //     for gear in available_data.gears.iter() {

@@ -10,8 +10,8 @@ use super::armor::Armor;
 use super::weapon::Weapon;
 
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
-pub struct ChargenData {
-    pub data_level: ChargenDataLevel,
+pub struct GameDataPackage {
+    pub data_level: GameDataPackageLevel,
     pub books: Vec<Book>,
     pub hindrances: Vec<Hindrance>,
     pub edges: Vec<Edge>,
@@ -21,10 +21,10 @@ pub struct ChargenData {
     pub weapons: Vec<Weapon>,
 }
 
-impl Default for ChargenData {
+impl Default for GameDataPackage {
     fn default( ) -> Self {
-        ChargenData {
-            data_level: ChargenDataLevel::Unloaded,
+        GameDataPackage {
+            data_level: GameDataPackageLevel::Unloaded,
             books: Vec::new(),
             hindrances: Vec::new(),
             edges: Vec::new(),
@@ -38,7 +38,7 @@ impl Default for ChargenData {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub enum ChargenDataLevel {
+pub enum GameDataPackageLevel {
     Unloaded = 0,
     Anonymous = 1,
     Registered = 2,
