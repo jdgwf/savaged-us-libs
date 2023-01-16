@@ -11,4 +11,4 @@ pub mod websocket_message;
 pub mod book;
 pub mod save_db_row;
 pub mod admin_libs;
-pub mod game_data;
+pub mod game_data_row;

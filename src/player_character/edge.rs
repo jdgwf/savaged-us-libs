@@ -1,15 +1,8 @@
-use uuid::{Uuid};
-use crate::player_character::PlayerCharacter;
-use crate::utils::array_to_string;
-// use std::collections::HashMap;
-// use crate::json_data::json_game_data::GameDataPackage;
-
 use chrono::prelude::*;
-// use super::super::utils::bool_from_int_or_bool;
-// use super::game_data::GameDataPackage;
-// use super::super::utils::string_to_uuid;
+use crate::player_character::PlayerCharacter;
 use serde::{Serialize, Deserialize};
 use serde;
+use uuid::{Uuid};
 
 #[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
 pub struct Edge {
@@ -97,7 +90,7 @@ impl Edge {
         }
     }
 
-    pub fn apply( mut char_obj: &PlayerCharacter ) {
+    pub fn apply( mut _char_obj: &PlayerCharacter ) {
 
     }
 }

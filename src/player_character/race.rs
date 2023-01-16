@@ -29,7 +29,7 @@ impl Race {
         }
     }
 
-    pub fn apply( mut char_obj: &PlayerCharacter ) {
+    pub fn apply( mut _char_obj: &PlayerCharacter ) {
 
     }
 }

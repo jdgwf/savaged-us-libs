@@ -1,9 +1,7 @@
-use uuid::{Uuid};
-use crate::{player_character::PlayerCharacter, utils::array_to_string, public_user_info::PublicUserInfo};
 use chrono::prelude::*;
-// use super::super::utils::bool_from_int_or_bool;
-// use super::super::utils::string_to_uuid;
+use crate::{player_character::PlayerCharacter, public_user_info::PublicUserInfo};
 use serde::{Serialize, Deserialize};
+use uuid::{Uuid};
 
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Hindrance {
@@ -171,7 +169,7 @@ impl Hindrance {
             updated_by_obj: None,
         }
     }
-    pub fn apply( mut char_obj: &PlayerCharacter ) {
+    pub fn apply( mut _char_obj: &PlayerCharacter ) {
 
     }
 }

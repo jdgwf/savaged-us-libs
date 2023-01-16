@@ -5,7 +5,7 @@ use serde_json;
 use crate::{public_user_info::PublicUserInfo, player_character::hindrance::Hindrance};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub struct GameData {
+pub struct GameDataRow {
     pub active: bool,
     pub book_id: u32,
     pub id: u32,
@@ -42,7 +42,7 @@ pub struct GameData {
     pub book_short_name: Option<String>,
 }
 
-impl GameData {
+impl GameDataRow {
     pub fn to_hindrance(&self) -> Result<Hindrance, serde_json::Error> {
 
         let item_result : Result<Hindrance, serde_json::Error> = serde_json::from_str( self.data.as_str() );

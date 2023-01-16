@@ -365,57 +365,93 @@ impl User {
     pub fn admin_can_read_item (
         &self,
         _book_list: &Option<Vec<Book>>,
-        _item_created_by: &u32,
-        _item_book_id: &u32,
+        _item_created_by: u32,
+        _item_book_id: u32,
     ) -> bool {
         return true;
     }
     pub fn admin_can_write_item (
         &self,
         book_list: &Option<Vec<Book>>,
-        item_created_by: &u32,
-        item_book_id: &u32,
+        item_created_by: u32,
+        item_book_id: u32,
     ) -> bool {
         if self.has_admin_access() {
             return true;
         }
+
+        if item_created_by == self.id {
+            return true;
+        }
+
+        if self.admin_can_write_book(book_list, item_book_id) {
+            return true;
+        }
+
         return false;
     }
     pub fn admin_can_add_item (
         &self,
         book_list: &Option<Vec<Book>>,
-        book_id: &u32,
+        book_id: u32,
     ) -> bool {
         if self.has_admin_access() {
             return true;
         }
+        if self.admin_can_write_book(book_list, book_id) {
+            return true;
+        }
         return false;
     }
+
     pub fn admin_can_read_book (
         &self,
-        book_list: &Option<Vec<Book>>,
-        book_id: &u32,
+        _book_list: &Option<Vec<Book>>,
+        _book_id: u32,
     ) -> bool {
         if self.has_admin_access() {
             return true;
         }
-        return false;
+        return true;
     }
+
     pub fn admin_can_write_book (
         &self,
         book_list: &Option<Vec<Book>>,
-        book_id: &u32,
+        book_id: u32,
     ) -> bool {
         if self.has_admin_access() {
             return true;
         }
+
+        match book_list {
+            Some( bl ) => {
+                for book in bl {
+                    if book.id == book_id {
+                        if book.created_by == self.id {
+                            return true;
+                        } else {
+                            for book_group_id in &book.write_groups {
+                                for self_group_id in &self.group_ids {
+                                    if self_group_id == book_group_id {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            None => {}
+        }
+
         return false;
     }
     pub fn admin_can_delete_item (
         &self,
         book_list: &Option<Vec<Book>>,
-        item_created_by: &u32,
-        item_book_id: &u32,
+        item_created_by: u32,
+        item_book_id: u32,
     ) -> bool {
         if self.has_admin_access() {
             return true;

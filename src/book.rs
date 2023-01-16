@@ -27,6 +27,9 @@ pub struct Book {
     // #[serde(default)]
     pub publisher: String,
 
+    #[serde(default)]
+    pub write_groups: Vec<u32>,
+
     // #[serde(default)]
     pub published: String,
 
@@ -96,6 +99,8 @@ impl Default for Book {
             publisher: "".to_owned(),
             published: "".to_owned(),
             active: false,
+
+            write_groups: Vec::new(),
 
             primary: false,
             core: false,

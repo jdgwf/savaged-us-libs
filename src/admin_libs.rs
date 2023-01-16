@@ -1,6 +1,6 @@
 use serde::{Serialize, Deserialize};
 
-use crate::book::Book;
+use crate::{book::Book, game_data_row::GameDataRow};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct FetchAdminParameters {
@@ -51,3 +51,34 @@ pub struct AdminPagingStatistics {
     pub book_list: Option<Vec<Book>>,
 }
 
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub struct AdminSaveReturn {
+    pub rows_affected: u32,
+    pub message_class: String,
+    pub message: String,
+    pub game_data: Option<Vec<GameDataRow>>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub struct AdminSavePackage {
+    #[serde(default)]
+    pub api_key: Option<String>,
+    #[serde(default)]
+    pub login_token: Option<String>,
+
+    pub id: u32,
+    pub data: String,
+    pub fetch_parameters: FetchAdminParameters,
+}
+
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub struct AdminDeletePackage {
+    #[serde(default)]
+    pub api_key: Option<String>,
+    #[serde(default)]
+    pub login_token: Option<String>,
+
+    pub id: u32,
+    pub fetch_parameters: FetchAdminParameters,
+}
