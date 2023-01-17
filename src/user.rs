@@ -447,6 +447,7 @@ impl User {
 
         return false;
     }
+
     pub fn admin_can_delete_item (
         &self,
         book_list: &Option<Vec<Book>>,
@@ -456,6 +457,15 @@ impl User {
         if self.has_admin_access() {
             return true;
         }
+
+        if item_created_by == self.id {
+            return true;
+        }
+
+        if self.admin_can_write_book(book_list, item_book_id) {
+            return true;
+        }
+
         return false;
     }
 
