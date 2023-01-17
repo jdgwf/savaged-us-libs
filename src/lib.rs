@@ -12,3 +12,4 @@ pub mod book;
 pub mod save_db_row;
 pub mod admin_libs;
 pub mod game_data_row;
+pub mod alert_level;

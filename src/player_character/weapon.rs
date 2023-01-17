@@ -29,6 +29,9 @@ pub struct Weapon {
     // #[serde(default)]
     pub book_id: u32,
 
+    #[serde(default, alias="bookPage")]
+    pub page: String,
+
     // #[serde(deserialize_with = "string_to_uuid")]
     #[serde(default)]
     pub uuid: Uuid,
@@ -70,6 +73,7 @@ impl Weapon {
             name: "".to_owned(),
             summary: "".to_owned(),
             // description: "".to_owned(),
+            page: "".to_owned(),
             custom_name: "".to_owned(),
             uuid: Uuid::new_v4(),
             created_on: None,

@@ -29,6 +29,9 @@ pub struct Armor {
     // #[serde(default)]
     pub book_id: u32,
 
+    #[serde(default, alias="bookPage")]
+    pub page: String,
+
     // #[serde(deserialize_with = "string_to_uuid")]
     #[serde(default)]
     pub uuid: Uuid,
@@ -76,7 +79,7 @@ impl Armor {
             updated_on: None,
             deleted_on: None,
             deleted: false,
-
+            page: "".to_owned(),
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,

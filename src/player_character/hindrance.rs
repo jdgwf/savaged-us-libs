@@ -116,6 +116,9 @@ pub struct Hindrance {
     // description: Vec<String>,
     #[serde(default)]
     pub specify: Option<String>,
+
+    #[serde(default, alias="bookPage")]
+    pub page: String,
 }
 
 impl Hindrance {
@@ -148,6 +151,8 @@ impl Hindrance {
             base_name: "".to_owned(),
             no_select: false,
             hidden_on_character_sheet: false,
+
+            page: "".to_owned(),
 
             setting_item: false,
             counts_as_other: Vec::new(),

@@ -3,6 +3,7 @@ pub mod get_dice_value;
 pub mod get_game_data_package;
 pub mod get_user_saves;
 pub mod date_formatting;
+pub mod string_manipulation;
 pub mod success_return;
 
 use serde::{Deserialize, Deserializer};
