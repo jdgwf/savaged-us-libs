@@ -3,6 +3,7 @@ use crate::player_character::PlayerCharacter;
 use serde::{Serialize, Deserialize};
 use serde;
 use uuid::{Uuid};
+use crate::public_user_info::PublicUserInfo;
 
 #[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
 pub struct Weapon {
@@ -21,7 +22,7 @@ pub struct Weapon {
     pub custom_name: String,
 
     // #[serde(default, deserialize_with = "array_to_string")]
-    // pub description: String,
+    pub description: String,
 
     // #[serde(default)]
     pub summary: String,
@@ -60,6 +61,27 @@ pub struct Weapon {
 
     #[serde(default)]
     pub deleted_by: u32,
+
+    #[serde(default)]
+    pub active: bool,
+
+    #[serde(default)]
+    pub created_by_obj: Option<PublicUserInfo>,
+
+    #[serde(default)]
+    pub updated_by_obj: Option<PublicUserInfo>,
+
+    #[serde(default)]
+    pub deleted_by_obj: Option<PublicUserInfo>,
+
+
+    #[serde(default)]
+    pub book_name: Option<String>,
+
+    #[serde(default)]
+    pub book_short_name: Option<String>,
+
+
 }
 
 impl Weapon {
@@ -67,12 +89,13 @@ impl Weapon {
     pub fn new() -> Weapon {
         //use the . operator to fetch the value of a field via the self keyword
         Weapon{
+            active: true,
             id: 0,
             book_id: 0,
             is_custom: false,
             name: "".to_owned(),
             summary: "".to_owned(),
-            // description: "".to_owned(),
+            description: "".to_owned(),
             page: "".to_owned(),
             custom_name: "".to_owned(),
             uuid: Uuid::new_v4(),
@@ -84,6 +107,13 @@ impl Weapon {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+
+            created_by_obj: None,
+            deleted_by_obj: None,
+            updated_by_obj: None,
+
+            book_name: None,
+            book_short_name: None,
         }
     }
 

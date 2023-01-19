@@ -131,8 +131,10 @@ impl Hindrance {
             description: "".to_owned(),
             uuid: Uuid::new_v4(),
             created_on: None,
+
             book_name: None,
             book_short_name: None,
+
             id: 0,
             book_id: 0,
             effects: Vec::new(),
@@ -142,7 +144,7 @@ impl Hindrance {
             deleted_on: None,
             deleted: false,
 
-            active: false,
+            active: true,
 
             created_by: 0,
             updated_by: 0,
