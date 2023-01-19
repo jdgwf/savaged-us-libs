@@ -83,7 +83,6 @@ impl Default for Banner {
     }
 }
 
-
 #[derive(Serialize, Deserialize, Eq, Clone, Debug, PartialEq)]
 pub struct SimpleBanner {
     pub id: u32,

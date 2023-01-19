@@ -75,7 +75,6 @@ pub struct AdminSavePackage {
     pub fetch_parameters: FetchAdminParameters,
 }
 
-
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct AdminDeletePackage {
     #[serde(default)]

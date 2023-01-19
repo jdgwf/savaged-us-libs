@@ -75,8 +75,6 @@ impl GameDataRow {
 
     }
 
-
-
     pub fn to_edge(&self) -> Result<Edge, serde_json::Error> {
 
         let item_result : Result<Edge, serde_json::Error> = serde_json::from_str( self.data.as_str() );
@@ -109,7 +107,6 @@ impl GameDataRow {
         }
 
     }
-
 
     pub fn to_gear(&self) -> Result<Gear, serde_json::Error> {
 

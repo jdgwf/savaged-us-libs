@@ -361,7 +361,6 @@ impl User {
         }
     }
 
-
     pub fn admin_can_read_item (
         &self,
         _book_list: &Option<Vec<Book>>,

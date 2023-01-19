@@ -29,8 +29,6 @@ pub struct Race {
     #[serde(default)]
     pub deleted_on:  Option<DateTime<Utc>>,
 
-
-
     #[serde(default)]
     pub created_by: u32,
 

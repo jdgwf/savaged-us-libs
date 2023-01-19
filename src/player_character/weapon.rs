@@ -74,13 +74,11 @@ pub struct Weapon {
     #[serde(default)]
     pub deleted_by_obj: Option<PublicUserInfo>,
 
-
     #[serde(default)]
     pub book_name: Option<String>,
 
     #[serde(default)]
     pub book_short_name: Option<String>,
-
 
 }
 

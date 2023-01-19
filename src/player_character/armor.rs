@@ -104,7 +104,6 @@ impl Armor {
             updated_by: 0,
             deleted_by: 0,
 
-
             created_by_obj: None,
             deleted_by_obj: None,
             updated_by_obj: None,
