@@ -1,7 +1,7 @@
 use crate::player_character::PlayerCharacter;
 
 impl PlayerCharacter {
-    pub fn export_html( &self ) -> String {
+    pub fn export_html(&self) -> String {
         let mut export_html: String = "".to_owned();
 
         export_html = export_html + "<h1>" + &self.name + "</h1>";

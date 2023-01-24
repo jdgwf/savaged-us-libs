@@ -1,14 +1,12 @@
-use chrono::prelude::*;
 use crate::player_character::PlayerCharacter;
 use crate::public_user_info::PublicUserInfo;
-use serde::{Serialize, Deserialize};
+use chrono::prelude::*;
 use serde;
-use uuid::{Uuid};
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
-
-#[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Gear {
-
     #[serde(default)]
     pub id: u32,
 
@@ -31,7 +29,7 @@ pub struct Gear {
     // #[serde(default)]
     pub book_id: u32,
 
-    #[serde(default, alias="bookPage")]
+    #[serde(default, alias = "bookPage")]
     pub page: String,
 
     // #[serde(deserialize_with = "string_to_uuid")]
@@ -40,15 +38,15 @@ pub struct Gear {
 
     // #[serde(default)]
     #[serde(default)]
-    pub created_on:  Option<DateTime<Utc>>,
+    pub created_on: Option<DateTime<Utc>>,
 
     // #[serde(default)]
     #[serde(default)]
-    pub updated_on:  Option<DateTime<Utc>>,
+    pub updated_on: Option<DateTime<Utc>>,
 
     // #[serde(default)]
     #[serde(default)]
-    pub deleted_on:  Option<DateTime<Utc>>,
+    pub deleted_on: Option<DateTime<Utc>>,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
@@ -83,10 +81,9 @@ pub struct Gear {
 }
 
 impl Gear {
-
     pub fn new() -> Gear {
         //use the . operator to fetch the value of a field via the self keyword
-        Gear{
+        Gear {
             active: true,
             id: 0,
             book_id: 0,
@@ -111,13 +108,10 @@ impl Gear {
 
             book_name: None,
             book_short_name: None,
-
         }
     }
 
-    pub fn get_name(
-        &self
-    ) -> String {
+    pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
             self.name.clone()
         } else {
@@ -125,9 +119,7 @@ impl Gear {
         }
     }
 
-    pub fn apply( mut _char_obj: &PlayerCharacter ) {
-
-    }
+    pub fn apply(mut _char_obj: &PlayerCharacter) {}
 }
 
 impl Gear {
@@ -153,20 +145,15 @@ impl Gear {
     //     self = def.clone();
     // }
 
-    pub fn import_vars(
-        &mut self,
-        vars_option: &Option<GearVars>,
-    ) {
+    pub fn import_vars(&mut self, vars_option: &Option<GearVars>) {
         match vars_option {
-            Some( vars ) => {
-                self.uuid = Uuid::parse_str( &vars.uuid ).unwrap();
+            Some(vars) => {
+                self.uuid = Uuid::parse_str(&vars.uuid).unwrap();
                 self.custom_name = vars.custom_name.clone();
             }
             None => {}
         }
-
     }
-
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]

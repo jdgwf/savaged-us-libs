@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 // #[allow(non_snake_case)]
@@ -30,7 +30,7 @@ pub struct PublicUserInfo {
 
 impl Default for PublicUserInfo {
     fn default() -> Self {
-        PublicUserInfo{
+        PublicUserInfo {
             username: "".to_owned(),
             name: "".to_owned(),
             twitter: "".to_owned(),
@@ -48,5 +48,4 @@ impl Default for PublicUserInfo {
             shared_saves: Vec::new(),
         }
     }
-
 }

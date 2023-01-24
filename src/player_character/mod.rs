@@ -1,27 +1,26 @@
-pub mod attributes;
-pub mod edge;
-pub mod hindrance;
-pub mod exports;
-pub mod gear;
 pub mod armor;
-pub mod weapon;
-pub mod imports;
-pub mod game_data_package;
+pub mod attributes;
 pub mod character_export;
+pub mod edge;
+pub mod exports;
+pub mod game_data_package;
+pub mod gear;
+pub mod hindrance;
+pub mod imports;
+pub mod weapon;
 
-use uuid::{Uuid};
-use attributes::Attributes;
-use edge::Edge;
-use crate::{setting::Setting, book::Book};
-use hindrance::Hindrance;
-use chrono::prelude::*;
 use self::game_data_package::GameDataPackage;
-use serde::{Serialize, Deserialize};
+use crate::{book::Book, setting::Setting};
+use attributes::Attributes;
+use chrono::prelude::*;
+use edge::Edge;
+use hindrance::Hindrance;
 use serde;
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
-#[derive(Deserialize,Serialize, Clone, Debug)]
+#[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct PlayerCharacter {
-
     pub name: String,
 
     #[serde(default)]
@@ -29,16 +28,16 @@ pub struct PlayerCharacter {
 
     pub attributes: Attributes,
 
-    pub selected_edges: Vec< Edge >,
-    pub selected_hindrances: Vec< Hindrance >,
+    pub selected_edges: Vec<Edge>,
+    pub selected_hindrances: Vec<Hindrance>,
 
-    pub added_edges: Vec< Edge >,
+    pub added_edges: Vec<Edge>,
 
-    pub added_hindrances: Vec< Hindrance >,
+    pub added_hindrances: Vec<Hindrance>,
 
-    pub created_on:  Option<DateTime<Utc>>,
-    pub updated_on:  Option<DateTime<Utc>>,
-    pub deleted_on:  Option<DateTime<Utc>>,
+    pub created_on: Option<DateTime<Utc>>,
+    pub updated_on: Option<DateTime<Utc>>,
+    pub deleted_on: Option<DateTime<Utc>>,
     pub deleted: bool,
 
     pub setting: Setting,
@@ -47,28 +46,27 @@ pub struct PlayerCharacter {
 }
 
 impl PlayerCharacter {
-
-    pub fn set_attribute_selected_agility( &mut self, new_val: u8 ) {
+    pub fn set_attribute_selected_agility(&mut self, new_val: u8) {
         self.attributes.selected_agility = new_val;
     }
-    pub fn set_attribute_selected_smarts( &mut self, new_val: u8 ) {
+    pub fn set_attribute_selected_smarts(&mut self, new_val: u8) {
         self.attributes.selected_smarts = new_val;
     }
-    pub fn set_attribute_selected_spirit( &mut self, new_val: u8 ) {
+    pub fn set_attribute_selected_spirit(&mut self, new_val: u8) {
         self.attributes.selected_spirit = new_val;
     }
-    pub fn set_attribute_selected_strength( &mut self, new_val: u8 ) {
+    pub fn set_attribute_selected_strength(&mut self, new_val: u8) {
         self.attributes.selected_strength = new_val;
     }
-    pub fn set_attribute_selected_vigor( &mut self, new_val: u8 ) {
+    pub fn set_attribute_selected_vigor(&mut self, new_val: u8) {
         self.attributes.selected_vigor = new_val;
     }
 
-    pub fn calc( &mut self ) {
+    pub fn calc(&mut self) {
         self._calc_reset();
     }
 
-    fn _calc_reset( &mut self ) {
+    fn _calc_reset(&mut self) {
         self.attributes.reset();
 
         self.added_edges = Vec::new();
@@ -79,12 +77,9 @@ impl PlayerCharacter {
 // WASM Bindgen Getters/Setters
 
 impl PlayerCharacter {
-
-    pub fn new(
-        available_data: GameDataPackage,
-    ) -> PlayerCharacter {
+    pub fn new(available_data: GameDataPackage) -> PlayerCharacter {
         //use the . operator to fetch the value of a field via the self keyword
-        let mut pc = PlayerCharacter{
+        let mut pc = PlayerCharacter {
             name: "".to_owned(),
             uuid: Uuid::new_v4(),
             attributes: Attributes::new(),
@@ -114,23 +109,23 @@ impl PlayerCharacter {
     //     self.name.clone()
     // }
 
-    pub fn get_available_edges_count( &self ) -> usize {
+    pub fn get_available_edges_count(&self) -> usize {
         self.available_data.edges.len()
     }
 
-    pub fn get_available_books_count( &self ) -> usize {
+    pub fn get_available_books_count(&self) -> usize {
         self.available_data.books.len()
     }
 
-    pub fn get_available_books_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.books ).unwrap()
+    pub fn get_available_books_json(&self) -> String {
+        serde_json::to_string(&self.available_data.books).unwrap()
     }
 
-    pub fn get_available_hindrances_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.hindrances ).unwrap()
+    pub fn get_available_hindrances_json(&self) -> String {
+        serde_json::to_string(&self.available_data.hindrances).unwrap()
     }
-    pub fn get_available_edges_json( &self ) -> String {
-        serde_json::to_string( &self.available_data.edges ).unwrap()
+    pub fn get_available_edges_json(&self) -> String {
+        serde_json::to_string(&self.available_data.edges).unwrap()
     }
 
     // pub fn get_available_weapons_json( &self ) -> String {
@@ -195,7 +190,7 @@ impl PlayerCharacter {
     //     self.attributes = new_value.clone();
     // }
 
-    pub fn reset( &mut self ) {
+    pub fn reset(&mut self) {
         self.name = "".to_owned();
         self.uuid = Uuid::new_v4();
         self.attributes = Attributes::new();
@@ -204,21 +199,19 @@ impl PlayerCharacter {
         self.added_edges = Vec::new();
         self.added_hindrances = Vec::new();
     }
-
 }
 
 // non WASM functions
 impl PlayerCharacter {
-
-    pub fn get_available_books( &self ) -> &Vec< Book > {
+    pub fn get_available_books(&self) -> &Vec<Book> {
         &self.available_data.books
     }
 
-    pub fn get_available_hindrances( &self ) -> &Vec< Hindrance > {
+    pub fn get_available_hindrances(&self) -> &Vec<Hindrance> {
         &self.available_data.hindrances
     }
 
-    pub fn get_available_edges( &self ) -> &Vec< Edge > {
+    pub fn get_available_edges(&self) -> &Vec<Edge> {
         &self.available_data.edges
     }
 
@@ -242,11 +235,11 @@ impl PlayerCharacter {
 // setting data functions
 
 impl PlayerCharacter {
-    pub fn setting_set_name( &mut self, new_name: String) {
+    pub fn setting_set_name(&mut self, new_name: String) {
         self.setting.name = new_name;
     }
 
-    pub fn setting_get_name( &mut self ) -> String {
+    pub fn setting_get_name(&mut self) -> String {
         self.setting.name.clone()
     }
 }

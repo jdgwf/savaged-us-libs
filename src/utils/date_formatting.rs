@@ -1,9 +1,6 @@
 use chrono::prelude::*;
 
-pub fn convert_utc_to_date(
-    utc: DateTime<Utc>,
-    show_timezone: bool,
-) -> String {
+pub fn convert_utc_to_date(utc: DateTime<Utc>, show_timezone: bool) -> String {
     // let utc = Utc::now();
     // let local = Local::now();
     let converted: DateTime<Local> = DateTime::from(utc);
@@ -12,13 +9,9 @@ pub fn convert_utc_to_date(
     } else {
         converted.format("%m/%d/%Y").to_string()
     }
-
 }
 
-pub fn convert_utc_to_datetime(
-    utc: DateTime<Utc>,
-    show_timezone: bool,
-) -> String {
+pub fn convert_utc_to_datetime(utc: DateTime<Utc>, show_timezone: bool) -> String {
     // let utc = Utc::now();
     // let local = Local::now();
     let converted: DateTime<Local> = DateTime::from(utc);
@@ -29,10 +22,7 @@ pub fn convert_utc_to_datetime(
     }
 }
 
-pub fn convert_utc_to_datetime_with_seconds(
-    utc: DateTime<Utc>,
-    show_timezone: bool,
-) -> String {
+pub fn convert_utc_to_datetime_with_seconds(utc: DateTime<Utc>, show_timezone: bool) -> String {
     // let utc = Utc::now();
     // let local = Local::now();
     let converted: DateTime<Local> = DateTime::from(utc);

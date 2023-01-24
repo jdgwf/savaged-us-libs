@@ -1,8 +1,8 @@
-use serde::{Serialize, Deserialize, Deserializer};
+use crate::{book::Book, public_user_info::PublicUserInfo};
 use chrono::prelude::*;
 use chrono_tz::Tz;
+use serde::{Deserialize, Deserializer, Serialize};
 use serde_json;
-use crate::{public_user_info::PublicUserInfo, book::Book};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct User {
@@ -51,7 +51,6 @@ pub struct User {
     pub reset_password_expire: Option<DateTime<Utc>>,
     // pub reset_password_link: String,
     // pub saves: Vec<Saves>,
-
     #[serde(default, deserialize_with = "_json_array_to_newline_string")]
     pub share_bio: String,
     pub share_display_name: String,
@@ -76,7 +75,7 @@ pub struct User {
 
 impl Default for User {
     fn default() -> Self {
-        User{
+        User {
             activated: false,
             api_key: "".to_owned(),
             banned: false,
@@ -92,7 +91,7 @@ impl Default for User {
             discord_id: "".to_owned(),
             email: "".to_owned(),
             first_name: "".to_owned(),
-            group_ids: Vec::new(),  // JSON "".to_owned()
+            group_ids: Vec::new(),         // JSON "".to_owned()
             hidden_banners: "".to_owned(), // JSON "".to_owned()
             id: 0,
             is_ace: false,
@@ -117,7 +116,6 @@ impl Default for User {
             reset_password_expire: None,
             // reset_password_link: "".to_owned(),
             // saves: Vec<Saves>,
-
             share_bio: "".to_owned(),
             share_display_name: "".to_owned(),
             share_show_profile_image: false,
@@ -135,30 +133,23 @@ impl Default for User {
             zombie_on: None,
         }
     }
-
 }
 impl User {
-
-    pub fn get_name(
-        &self,
-    ) -> String {
+    pub fn get_name(&self) -> String {
         let export_name = self.first_name.to_owned() + &" ".to_owned() + &self.last_name.to_owned();
-        return ( export_name ).trim().to_owned()
+        return (export_name).trim().to_owned();
     }
 
-    pub fn get_image(
-        &self,
-        base_url: &str,
-    ) -> String {
+    pub fn get_image(&self, base_url: &str) -> String {
         if self.profile_image.is_empty() {
             if self.is_admin {
-                return base_url.to_owned() + &"/images/king.jpg".to_owned()  ;
+                return base_url.to_owned() + &"/images/king.jpg".to_owned();
             } else if self.is_developer {
-                return base_url.to_owned() + &"/images/bishop.jpg".to_owned()  ;
+                return base_url.to_owned() + &"/images/bishop.jpg".to_owned();
             } else if self.is_premium {
-                return base_url.to_owned() + &"/images/knight.jpg".to_owned()  ;
+                return base_url.to_owned() + &"/images/knight.jpg".to_owned();
             } else {
-                return base_url.to_owned() + &"/images/pawn.jpg".to_owned()  ;
+                return base_url.to_owned() + &"/images/pawn.jpg".to_owned();
             }
         } else {
             // return base_url.to_owned() + &self.image_url.to_owned()  ;
@@ -167,23 +158,23 @@ impl User {
             let mut image_timestamp = now.timestamp();
 
             match self.updated_on {
-                Some( date ) => {
+                Some(date) => {
                     image_timestamp = date.timestamp();
                 }
-                None => {
-
-                }
+                None => {}
             }
-            let image_url = base_url.to_owned() + &format!("/data-images/users/{}.{}?u={}", self.id, self.profile_image, image_timestamp );
+            let image_url = base_url.to_owned()
+                + &format!(
+                    "/data-images/users/{}.{}?u={}",
+                    self.id, self.profile_image, image_timestamp
+                );
             return image_url.to_owned();
         }
     }
 
-    pub fn get_user_url(
-        &self,
-    ) -> String {
+    pub fn get_user_url(&self) -> String {
         let export_name = "https://savaged.us/u/".to_owned() + &self.username.to_owned();
-        return ( export_name ).trim().to_owned()
+        return (export_name).trim().to_owned();
     }
 
     fn get_timezone(&self) -> String {
@@ -192,13 +183,9 @@ impl User {
         } else {
             self.timezone.clone()
         }
-
     }
 
-    pub fn format_date(
-        &self,
-        incoming_date: DateTime<Utc>,
-    ) -> String {
+    pub fn format_date(&self, incoming_date: DateTime<Utc>) -> String {
         let tz: Tz = self.get_timezone().parse().unwrap();
         let shifted = incoming_date.with_timezone(&tz);
 
@@ -215,10 +202,10 @@ impl User {
         let tz: Tz = self.get_timezone().parse().unwrap();
         let shifted = incoming_date.with_timezone(&tz);
 
-        let mut format_string ="%H:%M".to_owned();
+        let mut format_string = "%H:%M".to_owned();
 
         if with_am_pm {
-            format_string ="%l:%M".to_owned();
+            format_string = "%l:%M".to_owned();
         }
 
         if with_seconds {
@@ -233,8 +220,7 @@ impl User {
             format_string = format_string + " %Z";
         }
 
-        return shifted.format(format_string.as_str() ).to_string();
-
+        return shifted.format(format_string.as_str()).to_string();
     }
 
     pub fn format_datetime(
@@ -247,10 +233,10 @@ impl User {
         let tz: Tz = self.get_timezone().parse().unwrap();
         let shifted = incoming_date.with_timezone(&tz);
 
-        let mut format_string ="%m/%d/%Y %H:%M".to_owned();
+        let mut format_string = "%m/%d/%Y %H:%M".to_owned();
 
         if with_am_pm {
-            format_string ="%m/%d/%Y %l:%M".to_owned();
+            format_string = "%m/%d/%Y %l:%M".to_owned();
         }
 
         if with_seconds {
@@ -265,8 +251,7 @@ impl User {
             format_string = format_string + " %Z";
         }
 
-        return shifted.format(format_string.as_str() ).to_string();
-
+        return shifted.format(format_string.as_str()).to_string();
     }
 
     pub fn has_premium_access(&self) -> bool {
@@ -289,12 +274,12 @@ impl User {
         if real_name.is_empty() {
             return self.username.to_owned();
         } else {
-            return real_name.trim().to_owned()
+            return real_name.trim().to_owned();
         }
     }
 
     pub fn has_admin_access(&self) -> bool {
-        if self.is_admin  {
+        if self.is_admin {
             return true;
         }
         return false;
@@ -311,20 +296,17 @@ impl User {
             return (self.last_name.to_owned() + &", " + &self.first_name).to_owned();
         } else {
             if !self.first_name.is_empty() {
-                return  self.first_name.to_owned();
+                return self.first_name.to_owned();
             } else {
                 if !self.last_name.is_empty() {
-                    return  self.last_name.to_owned();
+                    return self.last_name.to_owned();
                 }
             }
         }
         return "(no name)".to_owned();
     }
 
-    pub fn get_display_name(
-        &self,
-        for_admin: bool,
-    ) -> String {
+    pub fn get_display_name(&self, for_admin: bool) -> String {
         if for_admin {
             self.last_name.to_owned() + &", " + &self.first_name
         } else {
@@ -334,13 +316,9 @@ impl User {
                 self.username.to_owned()
             }
         }
-
     }
 
-    pub fn get_public_info(
-        &self,
-        for_admin: bool,
-    ) -> PublicUserInfo {
+    pub fn get_public_info(&self, for_admin: bool) -> PublicUserInfo {
         PublicUserInfo {
             username: self.username.to_owned(),
             name: self.get_display_name(for_admin),
@@ -361,7 +339,7 @@ impl User {
         }
     }
 
-    pub fn admin_can_read_item (
+    pub fn admin_can_read_item(
         &self,
         _book_list: &Option<Vec<Book>>,
         _item_created_by: u32,
@@ -369,7 +347,7 @@ impl User {
     ) -> bool {
         return true;
     }
-    pub fn admin_can_write_item (
+    pub fn admin_can_write_item(
         &self,
         book_list: &Option<Vec<Book>>,
         item_created_by: u32,
@@ -389,11 +367,7 @@ impl User {
 
         return false;
     }
-    pub fn admin_can_add_item (
-        &self,
-        book_list: &Option<Vec<Book>>,
-        book_id: u32,
-    ) -> bool {
+    pub fn admin_can_add_item(&self, book_list: &Option<Vec<Book>>, book_id: u32) -> bool {
         if self.has_admin_access() {
             return true;
         }
@@ -403,28 +377,20 @@ impl User {
         return false;
     }
 
-    pub fn admin_can_read_book (
-        &self,
-        _book_list: &Option<Vec<Book>>,
-        _book_id: u32,
-    ) -> bool {
+    pub fn admin_can_read_book(&self, _book_list: &Option<Vec<Book>>, _book_id: u32) -> bool {
         if self.has_admin_access() {
             return true;
         }
         return true;
     }
 
-    pub fn admin_can_write_book (
-        &self,
-        book_list: &Option<Vec<Book>>,
-        book_id: u32,
-    ) -> bool {
+    pub fn admin_can_write_book(&self, book_list: &Option<Vec<Book>>, book_id: u32) -> bool {
         if self.has_admin_access() {
             return true;
         }
 
         match book_list {
-            Some( bl ) => {
+            Some(bl) => {
                 for book in bl {
                     if book.id == book_id {
                         if book.created_by == self.id {
@@ -447,7 +413,7 @@ impl User {
         return false;
     }
 
-    pub fn admin_can_delete_item (
+    pub fn admin_can_delete_item(
         &self,
         book_list: &Option<Vec<Book>>,
         item_created_by: u32,
@@ -467,14 +433,13 @@ impl User {
 
         return false;
     }
-
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct LoginTokenResult {
     pub success: bool,
     pub active_notifications: u32,
-    pub user : User,
+    pub user: User,
     pub user_groups: Vec<UserGroup>,
     pub login_token: String,
     #[serde(default)]
@@ -501,7 +466,6 @@ pub struct ImageUpdateResult {
 pub struct UserGroup {
     pub id: u32,
     pub name: String,
-
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -520,14 +484,13 @@ fn _json_array_to_newline_string<'de, D>(deserializer: D) -> Result<String, D::E
 where
     D: Deserializer<'de>,
 {
-
     match String::deserialize(deserializer) {
-
-        Ok( val ) => {
+        Ok(val) => {
             if val.starts_with("[\"") {
-                let arr_result: Result<Vec<String>, serde_json::Error> = serde_json::from_str(val.as_str());
+                let arr_result: Result<Vec<String>, serde_json::Error> =
+                    serde_json::from_str(val.as_str());
                 match arr_result {
-                    Ok( arr ) => {
+                    Ok(arr) => {
                         let joined = arr.join("\n");
                         return Ok(joined);
                     }
@@ -540,10 +503,8 @@ where
             }
         }
 
-        Err( _err) => {
+        Err(_err) => {
             return Ok("".to_owned());
         }
-
     }
-
 }

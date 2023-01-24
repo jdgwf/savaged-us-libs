@@ -30,4 +30,3 @@ pub fn uppercase_words(data: &str) -> String {
     }
     result
 }
-

@@ -1,8 +1,7 @@
-use chrono::prelude::*;
 use crate::{player_character::PlayerCharacter, public_user_info::PublicUserInfo};
-use serde::{Serialize, Deserialize};
-use uuid::{Uuid};
-
+use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Hindrance {
@@ -43,15 +42,15 @@ pub struct Hindrance {
 
     // #[serde(default)]
     #[serde(default)]
-    pub created_on:  Option<DateTime<Utc>>,
+    pub created_on: Option<DateTime<Utc>>,
 
     // #[serde(default)]
     #[serde(default)]
-    pub updated_on:  Option<DateTime<Utc>>,
+    pub updated_on: Option<DateTime<Utc>>,
 
     // #[serde(default)]
     #[serde(default)]
-    pub deleted_on:  Option<DateTime<Utc>>,
+    pub deleted_on: Option<DateTime<Utc>>,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
@@ -118,15 +117,14 @@ pub struct Hindrance {
     #[serde(default)]
     pub specify: Option<String>,
 
-    #[serde(default, alias="bookPage")]
+    #[serde(default, alias = "bookPage")]
     pub page: String,
 }
 
 impl Hindrance {
-
     pub fn new() -> Hindrance {
         //use the . operator to fetch the value of a field via the self keyword
-        Hindrance{
+        Hindrance {
             name: "".to_owned(),
             summary: "".to_owned(),
             description: "".to_owned(),
@@ -177,9 +175,7 @@ impl Hindrance {
             updated_by_obj: None,
         }
     }
-    pub fn apply( mut _char_obj: &PlayerCharacter ) {
-
-    }
+    pub fn apply(mut _char_obj: &PlayerCharacter) {}
 }
 
 impl Hindrance {
@@ -199,9 +195,7 @@ impl Hindrance {
 
     // }
 
-    pub fn get_name(
-        &self
-    ) -> String {
+    pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
             self.name.clone()
         } else {
@@ -228,19 +222,15 @@ impl Hindrance {
 
     // }
 
-    pub fn import_vars(
-        &mut self,
-        vars_option: &Option<HindranceVars>,
-    ) {
+    pub fn import_vars(&mut self, vars_option: &Option<HindranceVars>) {
         match vars_option {
-            Some( vars ) => {
-                self.uuid = Uuid::parse_str( &vars.uuid ).unwrap();
+            Some(vars) => {
+                self.uuid = Uuid::parse_str(&vars.uuid).unwrap();
                 self.custom_name = vars.custom_name.clone();
             }
             None => {}
         }
     }
-
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]

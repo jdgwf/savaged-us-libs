@@ -1,5 +1,5 @@
-use serde::{Serialize, Deserialize};
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct Notification {

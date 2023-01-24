@@ -1,8 +1,7 @@
-use serde::{Serialize, Deserialize};
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 // use serde::de::{self, Unexpected};
 // use chrono_tz::Tz;
-
 
 // use super::utils::float_to_int;
 // use super::utils::bool_from_int_or_bool;
@@ -86,7 +85,6 @@ pub struct Book {
 }
 
 impl Default for Book {
-
     fn default() -> Self {
         Book {
             id: 0,
@@ -116,7 +114,7 @@ impl Default for Book {
             updated_by: 0,
             updated_on: None,
             version_of: 0,
-            description:  "".to_owned(),
+            description: "".to_owned(),
 
             access_registered: false,
             access_wildcard: false,
@@ -126,4 +124,3 @@ impl Default for Book {
         }
     }
 }
-

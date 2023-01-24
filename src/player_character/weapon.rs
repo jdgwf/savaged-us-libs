@@ -1,14 +1,12 @@
-use chrono::prelude::*;
 use crate::player_character::PlayerCharacter;
-use serde::{Serialize, Deserialize};
-use serde;
-use uuid::{Uuid};
 use crate::public_user_info::PublicUserInfo;
+use chrono::prelude::*;
+use serde;
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
-
-#[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Weapon {
-
     #[serde(default)]
     pub id: u32,
 
@@ -31,7 +29,7 @@ pub struct Weapon {
     // #[serde(default)]
     pub book_id: u32,
 
-    #[serde(default, alias="bookPage")]
+    #[serde(default, alias = "bookPage")]
     pub page: String,
 
     // #[serde(deserialize_with = "string_to_uuid")]
@@ -40,15 +38,15 @@ pub struct Weapon {
 
     // #[serde(default)]
     #[serde(default)]
-    pub created_on:  Option<DateTime<Utc>>,
+    pub created_on: Option<DateTime<Utc>>,
 
     // #[serde(default)]
     #[serde(default)]
-    pub updated_on:  Option<DateTime<Utc>>,
+    pub updated_on: Option<DateTime<Utc>>,
 
     // #[serde(default)]
     #[serde(default)]
-    pub deleted_on:  Option<DateTime<Utc>>,
+    pub deleted_on: Option<DateTime<Utc>>,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
@@ -80,14 +78,12 @@ pub struct Weapon {
 
     #[serde(default)]
     pub book_short_name: Option<String>,
-
 }
 
 impl Weapon {
-
     pub fn new() -> Weapon {
         //use the . operator to fetch the value of a field via the self keyword
-        Weapon{
+        Weapon {
             active: true,
             id: 0,
             book_id: 0,
@@ -116,9 +112,7 @@ impl Weapon {
         }
     }
 
-    pub fn get_name(
-        &self
-    ) -> String {
+    pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
             self.name.clone()
         } else {
@@ -126,9 +120,7 @@ impl Weapon {
         }
     }
 
-    pub fn apply( mut _char_obj: &PlayerCharacter ) {
-
-    }
+    pub fn apply(mut _char_obj: &PlayerCharacter) {}
 }
 
 impl Weapon {
@@ -154,20 +146,15 @@ impl Weapon {
     //     self = def.clone();
     // }
 
-    pub fn import_vars(
-        &mut self,
-        vars_option: &Option<WeaponVars>,
-    ) {
+    pub fn import_vars(&mut self, vars_option: &Option<WeaponVars>) {
         match vars_option {
-            Some( vars ) => {
-                self.uuid = Uuid::parse_str( &vars.uuid ).unwrap();
+            Some(vars) => {
+                self.uuid = Uuid::parse_str(&vars.uuid).unwrap();
                 self.custom_name = vars.custom_name.clone();
             }
             None => {}
         }
-
     }
-
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]

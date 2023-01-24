@@ -1,5 +1,5 @@
 use serde;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use chrono::prelude::*;
 

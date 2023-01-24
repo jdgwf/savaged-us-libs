@@ -1,10 +1,10 @@
-use serde::{Serialize, Deserialize};
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 // use serde::de::{self, Unexpected};
 // use chrono_tz::Tz;
 
-use super::utils::float_to_int;
 use super::utils::bool_from_int_or_bool;
+use super::utils::float_to_int;
 
 #[derive(Serialize, Deserialize, Clone, Eq, Debug, PartialEq)]
 pub struct Partner {
@@ -21,7 +21,7 @@ pub struct Partner {
     #[serde(deserialize_with = "bool_from_int_or_bool")]
     pub active: bool,
 
-    #[serde(deserialize_with = "float_to_int",default)]
+    #[serde(deserialize_with = "float_to_int", default)]
     pub clicks: u32,
 
     #[serde(deserialize_with = "bool_from_int_or_bool")]
@@ -43,10 +43,10 @@ pub struct Partner {
     #[serde(default)]
     pub description: String,
 
-    #[serde(deserialize_with = "float_to_int",default)]
+    #[serde(deserialize_with = "float_to_int", default)]
     pub impressions: u32,
     pub name_plural: String,
-    #[serde(deserialize_with = "bool_from_int_or_bool",default)]
+    #[serde(deserialize_with = "bool_from_int_or_bool", default)]
     pub prevent_hiding: bool,
     // pub created_by_user,
     // pub deleted_by_user,
@@ -54,7 +54,6 @@ pub struct Partner {
 }
 
 impl Default for Partner {
-
     fn default() -> Self {
         Partner {
             id: 0,
@@ -77,11 +76,10 @@ impl Default for Partner {
             updated_by: 0,
             updated_on: None,
             version_of: 0,
-            description:  "".to_owned(),
+            description: "".to_owned(),
             impressions: 0,
             name_plural: "".to_owned(),
             prevent_hiding: false,
         }
     }
 }
-

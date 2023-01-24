@@ -1,7 +1,7 @@
-use serde::{Serialize, Deserialize};
 use crate::player_character::edge::EdgeCombo;
 use crate::player_character::hindrance::HindranceCombo;
 use crate::setting::Setting;
+use serde::{Deserialize, Serialize};
 
 use super::super::utils::bool_from_int_or_bool;
 
@@ -59,7 +59,6 @@ pub struct GameDataRaceAbility {
     // pub selected_super_power_options: SuperPower2014ObjectVars,
     pub selected_power: u32,
     pub value: u32,
-
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
@@ -73,7 +72,6 @@ pub struct CharacterExport {
     #[serde(default)]
     pub last_save_id: i64,
     // pub race_choices: RaceOptions,
-
     pub attribute_assignments: BaseAttributes,
     #[serde(default)]
     pub version: f64,

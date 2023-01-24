@@ -1,8 +1,8 @@
 // use uuid::{Uuid};
+pub mod date_formatting;
 pub mod get_dice_value;
 pub mod get_game_data_package;
 pub mod get_user_saves;
-pub mod date_formatting;
 pub mod string_manipulation;
 pub mod success_return;
 
@@ -26,26 +26,23 @@ where
     //     )),
     // }
     match String::deserialize(deserializer) {
-
-        Ok( val ) => {
-            match val.as_ref() {
-                "0" => return Ok(false),
-                "1" => return Ok(true),
-                "false" => return Ok(false),
-                "true" => return Ok(true),
-                other => return Err(de::Error::invalid_value(
+        Ok(val) => match val.as_ref() {
+            "0" => return Ok(false),
+            "1" => return Ok(true),
+            "false" => return Ok(false),
+            "true" => return Ok(true),
+            other => {
+                return Err(de::Error::invalid_value(
                     Unexpected::Str(other),
                     &"zero or one",
-                )),
+                ))
             }
-        }
+        },
 
         Err(_err) => {
             return Ok(false);
         }
-
     }
-
 }
 
 pub fn float_to_int<'de, D>(deserializer: D) -> Result<u32, D::Error>
@@ -53,14 +50,12 @@ where
     D: Deserializer<'de>,
 {
     match f32::deserialize(deserializer)? {
-
         val => {
             let moo = val.round() as u32;
 
-            return Ok( moo );
-        },
+            return Ok(moo);
+        }
     }
-
 }
 
 pub fn deserialize_null_default<'de, D, T>(deserializer: D) -> Result<T, D::Error>

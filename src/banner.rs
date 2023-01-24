@@ -1,10 +1,10 @@
-use serde::{Serialize, Deserialize};
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 // use serde::de::{self, Unexpected};
 // use chrono_tz::Tz;
 
-use super::utils::float_to_int;
 use super::utils::bool_from_int_or_bool;
+use super::utils::float_to_int;
 
 #[derive(Serialize, Deserialize, Eq, Clone, Debug, PartialEq)]
 pub struct Banner {
@@ -21,7 +21,7 @@ pub struct Banner {
     #[serde(deserialize_with = "bool_from_int_or_bool")]
     pub active: bool,
 
-    #[serde(deserialize_with = "float_to_int",default)]
+    #[serde(deserialize_with = "float_to_int", default)]
     pub clicks: u32,
 
     // #[serde(deserialize_with = "bool_from_int_or_bool")]
@@ -40,11 +40,10 @@ pub struct Banner {
     pub updated_on: Option<DateTime<Utc>>,
     // pub version_of: u32,
     // pub description: String,
-
-    #[serde(deserialize_with = "float_to_int",default)]
+    #[serde(deserialize_with = "float_to_int", default)]
     pub impressions: u32,
     // pub name_plural: String,
-    #[serde(deserialize_with = "bool_from_int_or_bool",default)]
+    #[serde(deserialize_with = "bool_from_int_or_bool", default)]
     pub prevent_hiding: bool,
     // pub created_by_user,
     // pub deleted_by_user,
@@ -52,7 +51,6 @@ pub struct Banner {
 }
 
 impl Default for Banner {
-
     fn default() -> Self {
         Banner {
             id: 0,
@@ -121,7 +119,7 @@ pub struct SimpleBanner {
     // #[serde(deserialize_with = "float_to_int",default)]
     // pub impressions: u32,
     // pub name_plural: String,
-    #[serde(deserialize_with = "bool_from_int_or_bool",default)]
+    #[serde(deserialize_with = "bool_from_int_or_bool", default)]
     pub prevent_hiding: bool,
     // pub created_by_user,
     // pub deleted_by_user,

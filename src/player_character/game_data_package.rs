@@ -2,11 +2,11 @@ use serde::{Deserialize, Serialize};
 
 use crate::book::Book;
 
-use super::hindrance::Hindrance;
 use super::edge::Edge;
+use super::hindrance::Hindrance;
 
-use super::gear::Gear;
 use super::armor::Armor;
+use super::gear::Gear;
 use super::weapon::Weapon;
 
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
@@ -22,7 +22,7 @@ pub struct GameDataPackage {
 }
 
 impl Default for GameDataPackage {
-    fn default( ) -> Self {
+    fn default() -> Self {
         GameDataPackage {
             data_level: GameDataPackageLevel::Unloaded,
             books: Vec::new(),
@@ -34,7 +34,6 @@ impl Default for GameDataPackage {
             weapons: Vec::new(),
         }
     }
-
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -45,5 +44,4 @@ pub enum GameDataPackageLevel {
     WildCard = 3,
     Developer = 4,
     Admin = 5,
-
 }

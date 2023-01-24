@@ -1,7 +1,12 @@
-use serde::{Serialize, Deserialize};
+use crate::{
+    player_character::{
+        armor::Armor, edge::Edge, gear::Gear, hindrance::Hindrance, weapon::Weapon,
+    },
+    public_user_info::PublicUserInfo,
+};
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 use serde_json;
-use crate::{public_user_info::PublicUserInfo, player_character::{hindrance::Hindrance, armor::Armor, weapon::Weapon, gear::Gear, edge::Edge}};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct GameDataRow {
@@ -43,11 +48,10 @@ pub struct GameDataRow {
 
 impl GameDataRow {
     pub fn to_hindrance(&self) -> Result<Hindrance, serde_json::Error> {
-
-        let item_result : Result<Hindrance, serde_json::Error> = serde_json::from_str( self.data.as_str() );
+        let item_result: Result<Hindrance, serde_json::Error> =
+            serde_json::from_str(self.data.as_str());
         match item_result {
-            Ok( mut item ) => {
-
+            Ok(mut item) => {
                 item.book_name = self.book_name.clone();
                 item.book_short_name = self.book_short_name.clone();
 
@@ -67,20 +71,17 @@ impl GameDataRow {
 
                 return Ok(item);
             }
-            Err( err ) => {
+            Err(err) => {
                 println!("{}", self.data);
                 return Err(err);
             }
         }
-
     }
 
     pub fn to_edge(&self) -> Result<Edge, serde_json::Error> {
-
-        let item_result : Result<Edge, serde_json::Error> = serde_json::from_str( self.data.as_str() );
+        let item_result: Result<Edge, serde_json::Error> = serde_json::from_str(self.data.as_str());
         match item_result {
-            Ok( mut item ) => {
-
+            Ok(mut item) => {
                 item.book_name = self.book_name.clone();
                 item.book_short_name = self.book_short_name.clone();
 
@@ -100,20 +101,17 @@ impl GameDataRow {
 
                 return Ok(item);
             }
-            Err( err ) => {
+            Err(err) => {
                 println!("{}", self.data);
                 return Err(err);
             }
         }
-
     }
 
     pub fn to_gear(&self) -> Result<Gear, serde_json::Error> {
-
-        let item_result : Result<Gear, serde_json::Error> = serde_json::from_str( self.data.as_str() );
+        let item_result: Result<Gear, serde_json::Error> = serde_json::from_str(self.data.as_str());
         match item_result {
-            Ok( mut item ) => {
-
+            Ok(mut item) => {
                 item.book_name = self.book_name.clone();
                 item.book_short_name = self.book_short_name.clone();
 
@@ -133,20 +131,18 @@ impl GameDataRow {
 
                 return Ok(item);
             }
-            Err( err ) => {
+            Err(err) => {
                 println!("{}", self.data);
                 return Err(err);
             }
         }
-
     }
 
     pub fn to_weapon(&self) -> Result<Weapon, serde_json::Error> {
-
-        let item_result : Result<Weapon, serde_json::Error> = serde_json::from_str( self.data.as_str() );
+        let item_result: Result<Weapon, serde_json::Error> =
+            serde_json::from_str(self.data.as_str());
         match item_result {
-            Ok( mut item ) => {
-
+            Ok(mut item) => {
                 item.book_name = self.book_name.clone();
                 item.book_short_name = self.book_short_name.clone();
 
@@ -166,20 +162,18 @@ impl GameDataRow {
 
                 return Ok(item);
             }
-            Err( err ) => {
+            Err(err) => {
                 println!("{}", self.data);
                 return Err(err);
             }
         }
-
     }
 
     pub fn to_armor(&self) -> Result<Armor, serde_json::Error> {
-
-        let item_result : Result<Armor, serde_json::Error> = serde_json::from_str( self.data.as_str() );
+        let item_result: Result<Armor, serde_json::Error> =
+            serde_json::from_str(self.data.as_str());
         match item_result {
-            Ok( mut item ) => {
-
+            Ok(mut item) => {
                 item.book_name = self.book_name.clone();
                 item.book_short_name = self.book_short_name.clone();
 
@@ -199,11 +193,10 @@ impl GameDataRow {
 
                 return Ok(item);
             }
-            Err( err ) => {
+            Err(err) => {
                 println!("{}", self.data);
                 return Err(err);
             }
         }
-
     }
 }

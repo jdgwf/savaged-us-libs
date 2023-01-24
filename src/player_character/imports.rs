@@ -8,10 +8,7 @@ use super::character_export::CharacterExport;
 // use super::hindrance::Hindrance;
 
 impl PlayerCharacter {
-    pub fn import_json(
-        &mut self,
-        import_json_string: String,
-    ) {
+    pub fn import_json(&mut self, import_json_string: String) {
         println!("import_json_string {}", import_json_string);
         let import_data: CharacterExport = serde_json::from_str(&import_json_string).unwrap();
 
@@ -36,25 +33,22 @@ impl PlayerCharacter {
                     if edge.id == def.id {
                         let mut edge = edge.clone();
                         edge.uuid = Uuid::new_v4();
-                        edge.import_vars( &def.options );
+                        edge.import_vars(&def.options);
                         self.selected_edges.push(edge);
                     }
                 }
-
             } else {
                 match def.def {
-                    Some( def ) => {
+                    Some(def) => {
                         let edge = def.clone();
                         self.selected_edges.push(edge);
                     }
 
                     None => {}
                 }
-
             }
             // edge.import_from_id( def.id, &self.available_data );
             // edge.import_vars( &def.edgeOptions );
-
         }
 
         for def in import_data.hindrances {
@@ -65,25 +59,22 @@ impl PlayerCharacter {
                     if hind.id == hind.id {
                         let mut hind = hind.clone();
                         hind.uuid = Uuid::new_v4();
-                        hind.import_vars( &def.options );
+                        hind.import_vars(&def.options);
                         self.selected_hindrances.push(hind);
                     }
                 }
-
             } else {
                 match def.def {
-                    Some( def ) => {
+                    Some(def) => {
                         let hind = def.clone();
                         self.selected_hindrances.push(hind);
                     }
 
                     None => {}
                 }
-
             }
             // edge.import_from_id( def.id, &self.available_data );
             // edge.import_vars( &def.edgeOptions );
-
         }
         // for def in import_data.hindrances {
         //     let mut hindrance = Hindrance::new();

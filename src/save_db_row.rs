@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
 use crate::public_user_info::PublicUserInfo;
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 
 use super::utils::bool_from_int_or_bool;
 use super::utils::deserialize_null_default;
@@ -11,7 +11,6 @@ pub struct SaveDBRow {
 
     // #[serde(default)]
     // pub session_id: u32,
-
     #[serde(default, deserialize_with = "deserialize_null_default")]
     pub name: String,
 
@@ -29,13 +28,12 @@ pub struct SaveDBRow {
 
     // #[serde(default)]
     // setting_name: String,
-
     #[serde(default)]
     pub shareurl: String,
     #[serde(default)]
     pub short_desc: String,
 
-    pub share_public: bool ,
+    pub share_public: bool,
     pub share_copy: bool,
 
     #[serde(default)]
@@ -82,7 +80,6 @@ pub struct SaveDBRow {
     // #[serde(default)]
     pub co_owner_folder: String,
     // co_owner_public: IPublicUserInfo,
-
     #[serde(default)]
     pub created_on: Option<DateTime<Utc>>,
     #[serde(default)]

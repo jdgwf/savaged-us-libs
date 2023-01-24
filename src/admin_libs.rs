@@ -1,8 +1,8 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
+use crate::alert_level::AlertLevel;
 use crate::book::Book;
 use crate::game_data_row::GameDataRow;
-use crate::alert_level::AlertLevel;
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct FetchAdminParameters {
@@ -27,11 +27,9 @@ pub struct FetchAdminParameters {
 
     #[serde(default)]
     pub needs_book_list: bool,
-
 }
 
 pub fn new_fetch_admin_params() -> FetchAdminParameters {
-
     FetchAdminParameters {
         api_key: None,
         login_token: None,
@@ -43,7 +41,6 @@ pub fn new_fetch_admin_params() -> FetchAdminParameters {
         sort_by_ascending: true,
         needs_book_list: true,
     }
-
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
