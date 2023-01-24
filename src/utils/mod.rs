@@ -72,19 +72,51 @@ where
     Ok(opt.unwrap_or_default())
 }
 
-pub fn array_to_string<'de, D>(deserializer: D) -> Result<String, D::Error>
-where
-    D: Deserializer<'de>,
-{
-    match String::deserialize(deserializer) {
+// pub fn array_to_string<'de, D>(deserializer: D) -> Result<String, D::Error>
+// where
+//     D: Deserializer<'de>,
+// {
+//     match String::deserialize(deserializer) {
 
-        Ok( val ) => {
-            return Ok(val);
-        }
-        Err( _err ) => {
+//         Ok( val ) => {
+//             return Ok(val);
+//         }
+//         Err( _err ) => {
 
-        }
-    }
-    return Ok("".to_string());
+//         }
+//     }
+//     match Vec<String>::deserialize(deserializer) {
 
-}
+//         Ok( val ) => {
+//             return Ok(val.join("\n"));
+//         }
+//         Err( _err ) => {
+
+//         }
+//     }
+//     return Ok("".to_string());
+
+// }
+
+// pub fn array_to_string<'de, D, String>(deserializer: D) -> Result<String, D::Error>
+// where
+//     D: serde::Deserializer<'de>,
+//     String: serde::Deserialize<'de>,
+// {
+//     #[derive(Deserialize)]
+//     #[serde(untagged)]
+//     enum VecOrType<String> {
+//         Vec(Vec<String>),
+//         Type(String),
+//     }
+
+//     let value:VecOrType<String> = serde::Deserialize::deserialize(deserializer)?;
+//     match value {
+//         VecOrType::Vec(vec) => {
+//             Ok(vec.join("\n".to_string()))
+//         },
+//         VecOrType::Type(typ) => {
+//             Ok(typ)
+//         }
+//     }
+// }

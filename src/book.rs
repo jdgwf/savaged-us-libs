@@ -3,6 +3,7 @@ use chrono::prelude::*;
 // use serde::de::{self, Unexpected};
 // use chrono_tz::Tz;
 
+
 // use super::utils::float_to_int;
 // use super::utils::bool_from_int_or_bool;
 // use super::utils::deserialize_null_default;
@@ -69,7 +70,7 @@ pub struct Book {
     // #[serde(default)]
     pub version_of: u32,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub description: String,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]

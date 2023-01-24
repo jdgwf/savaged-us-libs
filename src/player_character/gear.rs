@@ -5,6 +5,7 @@ use serde::{Serialize, Deserialize};
 use serde;
 use uuid::{Uuid};
 
+
 #[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
 pub struct Gear {
 
@@ -21,7 +22,7 @@ pub struct Gear {
     #[serde(default)]
     pub custom_name: String,
 
-    // #[serde(default, deserialize_with = "array_to_string")]
+    #[serde(default)]
     pub description: String,
 
     // #[serde(default)]

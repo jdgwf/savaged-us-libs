@@ -3,6 +3,7 @@ use crate::{player_character::PlayerCharacter, public_user_info::PublicUserInfo}
 use serde::{Serialize, Deserialize};
 use uuid::{Uuid};
 
+
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Hindrance {
     // #[serde(default)]

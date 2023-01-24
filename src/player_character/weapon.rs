@@ -5,6 +5,7 @@ use serde;
 use uuid::{Uuid};
 use crate::public_user_info::PublicUserInfo;
 
+
 #[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
 pub struct Weapon {
 
@@ -21,7 +22,7 @@ pub struct Weapon {
     #[serde(default)]
     pub custom_name: String,
 
-    // #[serde(default, deserialize_with = "array_to_string")]
+    #[serde(default)]
     pub description: String,
 
     // #[serde(default)]

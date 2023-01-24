@@ -39,6 +39,8 @@ pub struct Partner {
     #[serde(default)]
     pub updated_on: Option<DateTime<Utc>>,
     pub version_of: u32,
+
+    #[serde(default)]
     pub description: String,
 
     #[serde(deserialize_with = "float_to_int",default)]

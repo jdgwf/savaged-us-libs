@@ -5,6 +5,7 @@ use serde;
 use uuid::{Uuid};
 use crate::public_user_info::PublicUserInfo;
 
+
 #[derive(Deserialize,Serialize, Clone, Debug, PartialEq)]
 pub struct Edge {
 
