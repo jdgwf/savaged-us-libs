@@ -5,6 +5,8 @@ use serde;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
+use super::container_item::ContainerItem;
+
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct Gear {
     #[serde(default)]
@@ -81,6 +83,35 @@ pub struct Gear {
 
     #[serde(default)]
     pub effects: Vec<String>,
+
+    #[serde(default)]
+    container: bool,
+    #[serde(default)]
+    container_no_weight: bool,
+    #[serde(default)]
+    container_fractional_weight: f32,
+    #[serde(default)]
+    cost: f32,
+    #[serde(default)]
+    abilities: Vec<String>,
+
+    #[serde(default)]
+    number_per: u32,
+    #[serde(default, alias="weapon_gimble_weight")]
+    weapon_gimbal_weight: f32,
+    #[serde(default)]
+    weight: f32,
+    #[serde(default)]
+    rippers_reason_cost: i32,
+    #[serde(default)]
+    quantity: u32,
+    #[serde(default)]
+    droppable_in_combat: bool,
+    #[serde(default)]
+    contains: Vec<ContainerItem>,
+
+    #[serde(default, alias="type")]
+    gear_type: String,
 }
 
 impl Gear {
@@ -113,6 +144,21 @@ impl Gear {
             book_short_name: None,
 
             effects: Vec::new(),
+
+            container: false,
+            container_no_weight: false,
+            container_fractional_weight: 1.0,
+            cost: 0.0,
+            abilities: Vec::new(),
+
+            number_per: 0,
+            weapon_gimbal_weight: 0.0,
+            weight: 0.0,
+            rippers_reason_cost: 0,
+            quantity: 0,
+            droppable_in_combat: false,
+            contains: Vec::new(),
+            gear_type: "".to_owned(),
         }
     }
 
@@ -184,6 +230,55 @@ impl Default for GearCombo {
             id: 0,
             options: None,
             def: None,
+        }
+    }
+}
+
+
+impl Default  for Gear {
+    fn default() -> Self {
+        Gear {
+            active: true,
+            id: 0,
+            book_id: 0,
+            is_custom: false,
+            name: "".to_owned(),
+            summary: "".to_owned(),
+            description: "".to_owned(),
+            custom_name: "".to_owned(),
+            uuid: Uuid::new_v4(),
+            created_on: None,
+            updated_on: None,
+            deleted_on: None,
+            deleted: false,
+            page: "".to_owned(),
+            created_by: 0,
+            updated_by: 0,
+            deleted_by: 0,
+
+            created_by_obj: None,
+            deleted_by_obj: None,
+            updated_by_obj: None,
+
+            book_name: None,
+            book_short_name: None,
+
+            effects: Vec::new(),
+
+            container: false,
+            container_no_weight: false,
+            container_fractional_weight: 1.0,
+            cost: 0.0,
+            abilities: Vec::new(),
+
+            number_per: 0,
+            weapon_gimbal_weight: 0.0,
+            weight: 0.0,
+            rippers_reason_cost: 0,
+            quantity: 0,
+            droppable_in_combat: false,
+            contains: Vec::new(),
+            gear_type: "".to_owned(),
         }
     }
 }

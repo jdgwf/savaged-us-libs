@@ -8,6 +8,7 @@ pub mod gear;
 pub mod hindrance;
 pub mod imports;
 pub mod weapon;
+pub mod container_item;
 
 use self::game_data_package::GameDataPackage;
 use crate::{book::Book, setting::Setting};
