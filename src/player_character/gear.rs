@@ -78,6 +78,9 @@ pub struct Gear {
 
     #[serde(default)]
     pub book_short_name: Option<String>,
+
+    #[serde(default)]
+    pub effects: Vec<String>,
 }
 
 impl Gear {
@@ -108,6 +111,8 @@ impl Gear {
 
             book_name: None,
             book_short_name: None,
+
+            effects: Vec::new(),
         }
     }
 

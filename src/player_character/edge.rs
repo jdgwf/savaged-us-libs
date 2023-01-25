@@ -75,6 +75,12 @@ pub struct Edge {
 
     #[serde(default)]
     pub description: String,
+
+    #[serde(default)]
+    pub effects: Vec<String>,
+
+    #[serde(default)]
+    pub conflicts: Vec<String>,
 }
 
 impl Edge {
@@ -105,6 +111,9 @@ impl Edge {
 
             book_name: None,
             book_short_name: None,
+
+            effects: Vec::new(),
+            conflicts: Vec::new(),
         }
     }
 

@@ -5,6 +5,22 @@ use serde::{Deserialize, Deserializer, Serialize};
 use serde_json;
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub enum UserLevel {
+    Anonymous = 0,
+    NotActivated = 1,
+    Registered = 2,
+    Wildcard = 3,
+    Developer = 4,
+    Admin = 5,
+}
+
+impl Default for UserLevel {
+    fn default() -> UserLevel {
+        UserLevel::Anonymous
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub struct User {
     pub activated: bool,
     pub api_key: String,
@@ -318,13 +334,33 @@ impl User {
         }
     }
 
+    pub fn get_user_level(&self,) -> UserLevel {
+        if self.has_admin_access() {
+            return UserLevel::Admin;
+        }
+
+        if self.has_developer_access() {
+            return UserLevel::Developer;
+        }
+
+        if self.has_premium_access() {
+            return UserLevel::Wildcard;
+        }
+
+        if self.id > 0 {
+            return UserLevel::Registered;
+        }
+
+        return UserLevel::Anonymous;
+    }
+
     pub fn get_public_info(&self, for_admin: bool) -> PublicUserInfo {
         PublicUserInfo {
             username: self.username.to_owned(),
             name: self.get_display_name(for_admin),
             twitter: self.twitter.to_owned(),
             image: self.image_url.to_owned(),
-            user_type: "".to_owned(),
+            // user_type: "".to_owned(),
             page: "".to_owned(),
             banned: false,
             banned_reason: "".to_owned(),
@@ -334,7 +370,7 @@ impl User {
             shares: Vec::new(),
             id: self.id,
             room_id: "".to_owned(),
-
+            user_level: self.get_user_level(),
             shared_saves: Vec::new(),
         }
     }

@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use crate::user::UserLevel;
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 // #[allow(non_snake_case)]
@@ -8,13 +9,16 @@ pub struct PublicUserInfo {
     pub name: String,
     pub twitter: String,
     pub image: String,
-    #[serde(default)]
-    pub user_type: String,
+    // #[serde(default)]
+    // pub user_type: String,
     pub page: String,
     pub banned: bool,
     pub banned_reason: String,
     pub show_user_page: bool,
     pub user_page_url: String,
+
+    #[serde(default)]
+    pub user_level: UserLevel,
 
     #[serde(default)]
     pub bio: Vec<String>,
@@ -35,7 +39,7 @@ impl Default for PublicUserInfo {
             name: "".to_owned(),
             twitter: "".to_owned(),
             image: "".to_owned(),
-            user_type: "".to_owned(),
+            // user_type: "".to_owned(),
             page: "".to_owned(),
             banned: false,
             banned_reason: "".to_owned(),
@@ -43,6 +47,7 @@ impl Default for PublicUserInfo {
             user_page_url: "".to_owned(),
             bio: Vec::new(),
             shares: Vec::new(),
+            user_level: UserLevel::Anonymous,
             id: 0,
             room_id: "".to_owned(),
             shared_saves: Vec::new(),
