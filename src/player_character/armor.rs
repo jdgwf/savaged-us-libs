@@ -86,36 +86,68 @@ pub struct Armor {
     #[serde(default)]
     pub effects: Vec<String>,
 
+    #[serde(default)]
     pub armor_value: u32,
+    #[serde(default)]
     pub abilities: Vec<String>,
+    #[serde(default)]
     pub hardness: u32,
+    #[serde(default)]
     pub stacks_with_other_armor: bool,
+    #[serde(default)]
     pub secondary_armor_value: String,
+    #[serde(default)]
     pub toughness: u32,
+
+    #[serde(default)]
     pub pf_armor_type: PathfinderArmorType,
+    #[serde(default)]
     pub ap_vs_lasers: u32,
+    #[serde(default)]
     pub rigid_armor: bool,
+    #[serde(default)]
     pub covers_head: bool,
+    #[serde(default)]
     pub covers_face: bool,
+    #[serde(default)]
     pub covers_torso: bool,
+    #[serde(default)]
     pub covers_arms: bool,
+    #[serde(default)]
     pub covers_legs: bool,
+    #[serde(default)]
     pub negate_4_ap: bool,
+    #[serde(default)]
     pub is_shield: bool,
+    #[serde(default)]
     pub is_energy_screen: bool,
+    #[serde(default)]
     pub shield_parry_bonus: u32,
+    #[serde(default)]
     pub shield_armor_vs_ranged: i32,
+    #[serde(default)]
     pub shield_cover_vs_ranged: i32,
+    #[serde(default)]
     pub minimum_strength: String,
+    #[serde(default)]
     pub requires_2_hands: bool,
+    #[serde(default)]
     pub pace: u32,
+    #[serde(default)]
     pub run: String,
+    #[serde(default)]
     pub set_strength: String,
+    #[serde(default)]
     pub heavy: bool,
+    #[serde(default)]
     pub size: u32,
+    #[serde(default)]
     pub default_model_label: String,
+    #[serde(default)]
     pub alternate_modes: Vec<ArmorAlternateMode>,
+    #[serde(default)]
     pub integrated_weapons: Vec<Weapon>,
+    #[serde(default)]
     pub zero_weight_when_equipped: bool,
 
     #[serde(default)]
@@ -124,6 +156,7 @@ pub struct Armor {
     pub weight: f32,
     #[serde(default)]
     pub quantity: u32,
+
 }
 
 impl Armor {
@@ -156,8 +189,6 @@ impl Armor {
             book_short_name: None,
 
             effects: Vec::new(),
-
-
 
             armor_value: 0,
             abilities: Vec::new(),
@@ -299,8 +330,6 @@ impl Default for Armor {
             book_short_name: None,
 
             effects: Vec::new(),
-
-
 
             armor_value: 0,
             abilities: Vec::new(),

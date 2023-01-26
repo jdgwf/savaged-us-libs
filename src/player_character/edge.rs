@@ -58,6 +58,9 @@ pub struct Edge {
     #[serde(default)]
     pub active: bool,
 
+    #[serde(default, alias="noSelect")]
+    pub cannot_be_selected: bool,
+
     #[serde(default)]
     pub created_by_obj: Option<PublicUserInfo>,
 
@@ -81,6 +84,9 @@ pub struct Edge {
 
     #[serde(default)]
     pub conflicts: Vec<String>,
+
+    #[serde(default)]
+    pub abilities: Vec<String>,
 }
 
 impl Edge {
@@ -104,6 +110,9 @@ impl Edge {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+            abilities: Vec::new(),
+
+            cannot_be_selected: false,
 
             created_by_obj: None,
             deleted_by_obj: None,

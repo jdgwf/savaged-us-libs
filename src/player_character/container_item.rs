@@ -5,7 +5,6 @@ use super::gear::Gear;
 use super::weapon::Weapon;
 use super::armor::Armor;
 
-
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
 pub struct ContainerItem {
     pub cost_buy: i32,

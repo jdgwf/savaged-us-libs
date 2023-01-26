@@ -9,7 +9,6 @@ use crate::public_user_info::PublicUserInfo;
 use crate::save_db_row::SaveDBRow;
 use crate::user::User;
 
-
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum WebsocketMessageType {
     Online = 1,

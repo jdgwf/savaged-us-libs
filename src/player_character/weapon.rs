@@ -102,6 +102,9 @@ pub struct Weapon {
     pub cost: f32,
     #[serde(default)]
     pub weight: f32,
+
+    #[serde(default)]
+    pub abilities: Vec<String>,
 }
 
 impl Weapon {
@@ -126,6 +129,7 @@ impl Weapon {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+            abilities: Vec::new(),
 
             created_by_obj: None,
             deleted_by_obj: None,
@@ -135,7 +139,6 @@ impl Weapon {
             book_short_name: None,
 
             effects: Vec::new(),
-
 
             minimum_strength:  "".to_owned(),
 
@@ -221,6 +224,7 @@ impl Default for Weapon {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+            abilities: Vec::new(),
 
             created_by_obj: None,
             deleted_by_obj: None,
@@ -230,7 +234,6 @@ impl Default for Weapon {
             book_short_name: None,
 
             effects: Vec::new(),
-
 
             minimum_strength:  "".to_owned(),
 

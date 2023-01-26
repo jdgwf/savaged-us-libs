@@ -117,8 +117,15 @@ pub struct Hindrance {
     #[serde(default)]
     pub specify: Option<String>,
 
+    #[serde(default)]
+    pub abilities: Vec<String>,
+
     #[serde(default, alias = "bookPage")]
     pub page: String,
+
+    #[serde(default, alias="noSelect")]
+    pub cannot_be_selected: bool,
+
 }
 
 impl Hindrance {
@@ -148,6 +155,7 @@ impl Hindrance {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+            abilities: Vec::new(),
 
             base_name: "".to_owned(),
             no_select: false,
@@ -161,6 +169,8 @@ impl Hindrance {
             minor_or_major: false,
             summary_minor: "".to_owned(),
             effects_minor: Vec::new(),
+
+            cannot_be_selected: false,
 
             conflicts: Vec::new(),
             needs_to_specify: false,

@@ -88,7 +88,7 @@ pub struct Gear {
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
-    container: bool,
+    pub container: bool,
 
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
@@ -118,6 +118,7 @@ pub struct Gear {
 
     #[serde(default, alias="type")]
     pub gear_type: String,
+
 }
 
 impl Gear {
@@ -239,7 +240,6 @@ impl Default for GearCombo {
         }
     }
 }
-
 
 impl Default  for Gear {
     fn default() -> Self {
