@@ -4,7 +4,9 @@ use chrono::prelude::*;
 use serde_repr::*;
 use serde;
 use serde::{Deserialize, Serialize};
+
 use uuid::Uuid;
+use crate::serde_string_to_u32_default_0;
 
 use super::weapon::Weapon;
 
@@ -94,8 +96,10 @@ pub struct Armor {
     pub hardness: u32,
     #[serde(default)]
     pub stacks_with_other_armor: bool,
-    #[serde(default)]
-    pub secondary_armor_value: String,
+
+    #[serde(default, deserialize_with = "serde_string_to_u32_default_0")]
+    pub secondary_armor_value: u32,
+
     #[serde(default)]
     pub toughness: u32,
 
@@ -194,7 +198,7 @@ impl Armor {
             abilities: Vec::new(),
             hardness: 0,
             stacks_with_other_armor: false,
-            secondary_armor_value: "".to_owned(),
+            secondary_armor_value: 0,
             toughness: 0,
 
             pf_armor_type: PathfinderArmorType::None,
@@ -335,7 +339,7 @@ impl Default for Armor {
             abilities: Vec::new(),
             hardness: 0,
             stacks_with_other_armor: false,
-            secondary_armor_value: "".to_owned(),
+            secondary_armor_value: 0,
             toughness: 0,
             pf_armor_type: PathfinderArmorType::None,
             ap_vs_lasers: 0,
@@ -374,7 +378,7 @@ pub struct ArmorAlternateMode {
     pub name: String,
     pub armor_value: u32,
     pub minimum_strength: String,
-    pub secondary_armor_value: String,
+    pub secondary_armor_value: u32,
     pub toughness: u32,
     pub heavy: bool,
     pub effects: Vec<String>,
@@ -387,7 +391,7 @@ impl Default for ArmorAlternateMode {
             name: "".to_string(),
             armor_value: 0,
             minimum_strength: "".to_string(),
-            secondary_armor_value: "".to_string(),
+            secondary_armor_value: 0,
             toughness: 0,
             heavy: false,
             effects: Vec::new(),
@@ -410,3 +414,4 @@ impl Default for PathfinderArmorType {
         PathfinderArmorType::None
     }
 }
+
