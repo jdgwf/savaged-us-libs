@@ -109,6 +109,7 @@ impl GameDataRow {
     }
 
     pub fn to_gear(&self) -> Result<Gear, serde_json::Error> {
+
         let item_result: Result<Gear, serde_json::Error> = serde_json::from_str(self.data.as_str());
         match item_result {
             Ok(mut item) => {

@@ -1,5 +1,6 @@
 use crate::player_character::PlayerCharacter;
 use crate::public_user_info::PublicUserInfo;
+// use crate::utils::bool_from_int_or_bool;
 use chrono::prelude::*;
 use serde;
 use serde::{Deserialize, Serialize};
@@ -63,6 +64,7 @@ pub struct Gear {
     #[serde(default)]
     pub deleted_by: u32,
 
+    // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
     pub active: bool,
 
@@ -84,34 +86,38 @@ pub struct Gear {
     #[serde(default)]
     pub effects: Vec<String>,
 
+    // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
     container: bool,
+
+    // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
-    container_no_weight: bool,
+    pub container_no_weight: bool,
     #[serde(default)]
-    container_fractional_weight: f32,
+    pub container_fractional_weight: f32,
     #[serde(default)]
-    cost: f32,
+    pub cost: f32,
     #[serde(default)]
-    abilities: Vec<String>,
+    pub abilities: Vec<String>,
 
     #[serde(default)]
-    number_per: u32,
+    pub number_per: u32,
     #[serde(default, alias="weapon_gimble_weight")]
-    weapon_gimbal_weight: f32,
+    pub weapon_gimbal_weight: f32,
     #[serde(default)]
-    weight: f32,
+    pub weight: f32,
     #[serde(default)]
-    rippers_reason_cost: i32,
+    pub rippers_reason_cost: i32,
     #[serde(default)]
-    quantity: u32,
+    pub quantity: u32,
+    // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
-    droppable_in_combat: bool,
+    pub droppable_in_combat: bool,
     #[serde(default)]
-    contains: Vec<ContainerItem>,
+    pub contains: Vec<ContainerItem>,
 
     #[serde(default, alias="type")]
-    gear_type: String,
+    pub gear_type: String,
 }
 
 impl Gear {

@@ -81,6 +81,27 @@ pub struct Weapon {
 
     #[serde(default)]
     pub effects: Vec<String>,
+
+    #[serde(default)]
+    pub minimum_strength:  String,
+
+    #[serde(default)]
+    pub tw_cost:  f32,
+    #[serde(default)]
+    pub tw_effects:  String,
+
+    #[serde(default)]
+    pub vehicle_mods:  u32,
+    #[serde(default)]
+    pub extra_notes:  String,
+
+    #[serde(default)]
+    pub profiles: Vec<WeaponProfile>,
+
+    #[serde(default)]
+    pub cost: f32,
+    #[serde(default)]
+    pub weight: f32,
 }
 
 impl Weapon {
@@ -114,6 +135,22 @@ impl Weapon {
             book_short_name: None,
 
             effects: Vec::new(),
+
+
+            minimum_strength:  "".to_owned(),
+
+            tw_cost: 0.0,
+            tw_effects:  "".to_owned(),
+
+            vehicle_mods:  0,
+            extra_notes:  "".to_string(),
+
+            profiles: Vec::new(),
+
+            weight: 0.0,
+
+            cost: 0.0,
+
         }
     }
 
@@ -162,6 +199,58 @@ impl Weapon {
     }
 }
 
+impl Default for Weapon {
+    fn default() -> Self {
+
+        Weapon {
+            active: true,
+            id: 0,
+            book_id: 0,
+            is_custom: false,
+            name: "".to_owned(),
+            summary: "".to_owned(),
+            description: "".to_owned(),
+            page: "".to_owned(),
+            custom_name: "".to_owned(),
+            uuid: Uuid::new_v4(),
+            created_on: None,
+            updated_on: None,
+            deleted_on: None,
+            deleted: false,
+
+            created_by: 0,
+            updated_by: 0,
+            deleted_by: 0,
+
+            created_by_obj: None,
+            deleted_by_obj: None,
+            updated_by_obj: None,
+
+            book_name: None,
+            book_short_name: None,
+
+            effects: Vec::new(),
+
+
+            minimum_strength:  "".to_owned(),
+
+            tw_cost: 0.0,
+            tw_effects:  "".to_owned(),
+
+            vehicle_mods:  0,
+            extra_notes:  "".to_string(),
+
+            profiles: Vec::new(),
+
+            weight: 0.0,
+
+            cost: 0.0,
+
+        }
+
+    }
+}
+
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct WeaponVars {
     #[serde(default)]
@@ -185,6 +274,114 @@ impl Default for WeaponCombo {
             id: 0,
             options: None,
             def: None,
+        }
+    }
+}
+
+#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
+pub struct WeaponProfile {
+    #[serde(default)]
+    pub name:  String,
+    #[serde(default)]
+    pub damage:  String,
+    #[serde(default, alias = "damageWithBrackets")]
+    pub damage_with_brackets:  String,
+    #[serde(default)]
+    pub damage_original:  String,
+    #[serde(default)]
+    pub parry_modifier: i32,
+    #[serde(default)]
+    pub range:  String,
+    #[serde(default)]
+    pub reach:  u32,
+    #[serde(default)]
+    pub requires_2_hands: bool,
+    #[serde(default)]
+    pub rof:  u32,
+    #[serde(default)]
+    pub shots:  u32,
+    #[serde(default, alias = "currentShots")]
+    pub current_shots:  u32,
+    #[serde(default)]
+    pub heavy_weapon: bool,
+    #[serde(default)]
+    pub melee_only: bool,
+    #[serde(default)]
+    pub counts_as_innate: bool,
+    #[serde(default)]
+    pub notes:  String,
+    #[serde(default)]
+    pub equipped: bool,
+
+    #[serde(default, alias = "toHitMod")]
+    pub to_hit_mod:  i32,
+
+    #[serde(default, alias = "damageDiceBase")]
+    pub damage_dice_base:  String,
+    #[serde(default, alias = "damageDiceBasePlus")]
+    pub damage_dice_base_plus:  i32,
+
+    #[serde(default)]
+    pub is_shield: bool,
+    #[serde(default)]
+    pub thrown_weapon: bool,
+
+    #[serde(default)]
+    pub usable_in_melee: bool,
+    #[serde(default)]
+    pub add_strength_to_damage: bool,
+    #[serde(default)]
+    pub ap:  i32,
+    #[serde(default)]
+    pub ap_vs_rigid_armor_only:  u32,
+
+    #[serde(default)]
+    pub vtt_only: bool,
+
+    #[serde(default, alias = "skillName")]
+    pub skill_name:  String,
+    #[serde(default, alias = "skillValue")]
+    pub skill_value:  String,
+}
+
+impl Default for WeaponProfile {
+    fn default() -> Self {
+        WeaponProfile {
+            name:  "".to_string(),
+            damage:  "".to_string(),
+            damage_with_brackets:  "".to_string(),
+            damage_original:  "".to_string(),
+            parry_modifier:  0,
+            range:  "".to_string(),
+            reach:  0,
+            requires_2_hands: false,
+            rof:  0,
+            shots:  0,
+            current_shots:  0,
+
+            heavy_weapon: false,
+            melee_only: false,
+            counts_as_innate: false,
+            notes:  "".to_string(),
+            equipped: false,
+
+            to_hit_mod:  0,
+
+            damage_dice_base:  "".to_string(),
+            damage_dice_base_plus:  0,
+
+            is_shield: false,
+            thrown_weapon: false,
+
+            usable_in_melee: false,
+            add_strength_to_damage: false,
+            ap:  0,
+            ap_vs_rigid_armor_only:  0,
+
+            vtt_only: false,
+
+            skill_name:  "".to_string(),
+            skill_value:  "".to_string(),
         }
     }
 }
