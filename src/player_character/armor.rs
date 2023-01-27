@@ -3,15 +3,14 @@ use crate::public_user_info::PublicUserInfo;
 use chrono::prelude::*;
 use serde_repr::*;
 use serde;
+use serde_with::serde_as;
+use serde_with::DefaultOnError;
 use serde::{Deserialize, Serialize};
-
 use uuid::Uuid;
-use crate::serde_string_to_u32_default_0;
-
 use super::weapon::Weapon;
 
+#[serde_as]
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
-#[serde(tag = "pf_armor_type")]
 pub struct Armor {
     #[serde(default)]
     pub id: u32,
@@ -97,14 +96,18 @@ pub struct Armor {
     #[serde(default)]
     pub stacks_with_other_armor: bool,
 
-    #[serde(default, deserialize_with = "serde_string_to_u32_default_0")]
+    #[serde_as(deserialize_as = "DefaultOnError")]
+    #[serde(default)]
     pub secondary_armor_value: u32,
 
     #[serde(default)]
     pub toughness: u32,
 
+    #[serde_as(deserialize_as = "DefaultOnError")]
     #[serde(default)]
     pub pf_armor_type: PathfinderArmorType,
+
+
     #[serde(default)]
     pub ap_vs_lasers: u32,
     #[serde(default)]
