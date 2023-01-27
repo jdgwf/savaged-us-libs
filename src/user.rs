@@ -87,6 +87,7 @@ pub struct User {
     pub unread_notifications: u32,
     #[serde(default)]
     pub zombie_on: Option<DateTime<Utc>>,
+
 }
 
 impl Default for User {
@@ -136,7 +137,6 @@ impl Default for User {
             share_display_name: "".to_owned(),
             share_show_profile_image: false,
             show_user_page: false,
-            theme_css: "".to_owned(),
             timezone: "".to_owned(),
             turn_off_advance_limits: false,
             twitter: "".to_owned(),
@@ -147,6 +147,9 @@ impl Default for User {
             zombie: false,
             unread_notifications: 0,
             zombie_on: None,
+            theme_css: "_default_".to_owned(),
+
+
         }
     }
 }
