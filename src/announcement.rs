@@ -7,22 +7,24 @@ use super::utils::bool_from_int_or_bool;
 use super::utils::float_to_int;
 use crate::public_user_info::PublicUserInfo;
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
-pub struct Banner {
+pub struct Announcement {
     pub id: u32,
     #[serde(default)]
-    pub end: Option<DateTime<Utc>>,
+    // pub end: Option<DateTime<Utc>>,
     pub href: String,
-    pub name: String,
+    // pub name: String,
     // pub r#type: String,
     pub image: String,
     #[serde(default)]
-    pub start: Option<DateTime<Utc>>,
+    pub published: Option<DateTime<Utc>>,
     pub title: String,
     #[serde(deserialize_with = "bool_from_int_or_bool")]
     pub active: bool,
 
-    #[serde(deserialize_with = "float_to_int", default)]
-    pub clicks: u32,
+    pub story: String,
+    // pub markdown: String,
+    // #[serde(deserialize_with = "float_to_int", default)]
+    // pub clicks: u32,
 
     // #[serde(deserialize_with = "bool_from_int_or_bool")]
     // pub deleted: bool,
@@ -40,11 +42,11 @@ pub struct Banner {
     pub updated_on: Option<DateTime<Utc>>,
     // pub version_of: u32,
     // pub description: String,
-    #[serde(deserialize_with = "float_to_int", default)]
-    pub impressions: u32,
+    // #[serde(deserialize_with = "float_to_int", default)]
+    // pub impressions: u32,
     // pub name_plural: String,
-    #[serde(deserialize_with = "bool_from_int_or_bool", default)]
-    pub prevent_hiding: bool,
+    // #[serde(deserialize_with = "bool_from_int_or_bool", default)]
+    // pub prevent_hiding: bool,
 
     #[serde(default)]
     pub created_by_obj: Option<PublicUserInfo>,
@@ -56,19 +58,21 @@ pub struct Banner {
     pub deleted_by_obj: Option<PublicUserInfo>,
 }
 
-impl Default for Banner {
+impl Default for Announcement {
     fn default() -> Self {
-        Banner {
+        Announcement {
             id: 0,
-            end: None,
+            // end: None,
             href: "".to_owned(),
-            name: "".to_owned(),
+            // name: "".to_owned(),
             // r#type: "".to_owned(),
             image: "".to_owned(),
-            start: None,
+            published: None,
             title: "".to_owned(),
+            story: "".to_owned(),
+            // markdown: "".to_owned(),
             active: false,
-            clicks: 0,
+            // clicks: 0,
             // deleted: false,
             // summary: "".to_owned(),
             // read_only: false,
@@ -80,9 +84,9 @@ impl Default for Banner {
             updated_on: None,
             // version_of: 0,
             // description:  "".to_owned(),
-            impressions: 0,
+            // impressions: 0,
             // name_plural: "".to_owned(),
-            prevent_hiding: false,
+            // prevent_hiding: false,
 
             created_by_obj: None,
             deleted_by_obj: None,
@@ -91,26 +95,26 @@ impl Default for Banner {
     }
 }
 
-impl Banner {
-    pub fn to_simple(&self) -> SimpleBanner {
-        SimpleBanner {
+impl Announcement {
+    pub fn to_simple(&self) -> SimpleAnnouncement {
+        SimpleAnnouncement {
             id: self.id,
-            href: self.href.to_owned(),
-            name: self.name.to_owned(),
+            story: self.story.to_owned(),
+            // name: self.name.to_owned(),
+            published: self.published.to_owned(),
             image: self.image.to_owned(),
             title: self.title.to_owned(),
-            prevent_hiding: self.prevent_hiding,
         }
     }
 }
 
 #[derive(Serialize, Deserialize, Eq, Clone, Debug, PartialEq)]
-pub struct SimpleBanner {
+pub struct SimpleAnnouncement {
     pub id: u32,
-    pub href: String,
-    pub name: String,
+    pub story: String,
+    // pub name: String,
+    pub published: Option<DateTime<Utc>>,
     pub image: String,
     pub title: String,
-    pub prevent_hiding: bool,
 
 }

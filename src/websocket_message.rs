@@ -8,6 +8,7 @@ use crate::public_user_info::PublicUserInfo;
 // use crate::public_user_info::PublicUserInfo;
 use crate::save_db_row::SaveDBRow;
 use crate::user::User;
+use crate::web_content::WebContent;
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 pub enum WebsocketMessageType {
@@ -32,6 +33,7 @@ pub struct WebSocketMessage {
     pub saves: Option<Vec<SaveDBRow>>,
     pub include_saves: bool,
     pub user_list: Option<Vec<PublicUserInfo>>,
+    pub web_content: Option<WebContent>,
 }
 
 impl Default for WebSocketMessage {
@@ -46,6 +48,7 @@ impl Default for WebSocketMessage {
             saves: None,
             user_list: None,
             include_saves: false,
+            web_content: None,
         }
     }
 }
