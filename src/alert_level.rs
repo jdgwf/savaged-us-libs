@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub enum AlertLevel {
     Secondary = 0,
     Info = 1,

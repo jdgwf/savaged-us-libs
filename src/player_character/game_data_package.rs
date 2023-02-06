@@ -9,7 +9,7 @@ use super::armor::Armor;
 use super::gear::Gear;
 use super::weapon::Weapon;
 
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
 pub struct GameDataPackage {
     pub data_level: GameDataPackageLevel,
     pub books: Vec<Book>,
@@ -36,7 +36,7 @@ impl Default for GameDataPackage {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub enum GameDataPackageLevel {
     Unloaded = 0,
     Anonymous = 1,

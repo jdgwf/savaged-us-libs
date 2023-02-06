@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use super::utils::bool_from_int_or_bool;
 use super::utils::float_to_int;
 use crate::public_user_info::PublicUserInfo;
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Banner {
     pub id: u32,
     #[serde(default)]
@@ -104,7 +104,7 @@ impl Banner {
     }
 }
 
-#[derive(Serialize, Deserialize, Eq, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct SimpleBanner {
     pub id: u32,
     pub href: String,

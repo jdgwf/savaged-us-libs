@@ -8,7 +8,7 @@ use uuid::Uuid;
 
 use super::container_item::ContainerItem;
 
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
 pub struct Gear {
     #[serde(default)]
     pub id: u32,
@@ -69,6 +69,9 @@ pub struct Gear {
     pub active: bool,
 
     #[serde(default)]
+    pub no_select: bool,
+
+    #[serde(default)]
     pub created_by_obj: Option<PublicUserInfo>,
 
     #[serde(default)]
@@ -122,59 +125,17 @@ pub struct Gear {
 }
 
 impl Gear {
-    pub fn new() -> Gear {
-        //use the . operator to fetch the value of a field via the self keyword
-        Gear {
-            active: true,
-            id: 0,
-            book_id: 0,
-            is_custom: false,
-            name: "".to_owned(),
-            summary: "".to_owned(),
-            description: "".to_owned(),
-            custom_name: "".to_owned(),
-            uuid: Uuid::new_v4(),
-            created_on: None,
-            updated_on: None,
-            deleted_on: None,
-            deleted: false,
-            page: "".to_owned(),
-            created_by: 0,
-            updated_by: 0,
-            deleted_by: 0,
 
-            created_by_obj: None,
-            deleted_by_obj: None,
-            updated_by_obj: None,
-
-            book_name: None,
-            book_short_name: None,
-
-            effects: Vec::new(),
-
-            container: false,
-            container_no_weight: false,
-            container_fractional_weight: 1.0,
-            cost: 0.0,
-            abilities: Vec::new(),
-
-            number_per: 0,
-            weapon_gimbal_weight: 0.0,
-            weight: 0.0,
-            rippers_reason_cost: 0,
-            quantity: 0,
-            droppable_in_combat: false,
-            contains: Vec::new(),
-            gear_type: "".to_owned(),
-        }
-    }
 
     pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
-            self.name.clone()
+            self.name.to_owned()
         } else {
-            self.custom_name.clone()
+            self.custom_name.to_owned()
         }
+    }
+    pub fn get_summary(&self) -> String {
+        self.summary.to_owned()
     }
 
     pub fn apply(mut _char_obj: &PlayerCharacter) {}
@@ -261,6 +222,7 @@ impl Default  for Gear {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
+            no_select: false,
 
             created_by_obj: None,
             deleted_by_obj: None,

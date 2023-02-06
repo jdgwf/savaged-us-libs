@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use crate::{help_article::SimpleHelpArticle, partner::SimplePartner, banner::SimpleBanner, announcement::SimpleAnnouncement};
 
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct WebContent {
     pub partners: Option<Vec<SimplePartner>>,
     pub banners: Option<Vec<SimpleBanner>>,

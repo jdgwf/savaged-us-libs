@@ -8,7 +8,7 @@ use crate::public_user_info::PublicUserInfo;
 use super::utils::bool_from_int_or_bool;
 use super::utils::float_to_int;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Partner {
 
     #[serde(deserialize_with = "bool_from_int_or_bool")]
@@ -120,7 +120,7 @@ impl Default for Partner {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Eq, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct SimplePartner {
     pub id: u32,
     #[serde(deserialize_with = "bool_from_int_or_bool")]

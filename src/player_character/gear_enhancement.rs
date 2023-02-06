@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
-pub struct Weapon {
+pub struct GearEnhancement {
     #[serde(default)]
     pub id: u32,
 
@@ -62,10 +62,10 @@ pub struct Weapon {
     pub deleted_by: u32,
 
     #[serde(default)]
-    pub no_select: bool,
+    pub active: bool,
 
     #[serde(default)]
-    pub active: bool,
+    pub no_select: bool,
 
     #[serde(default)]
     pub created_by_obj: Option<PublicUserInfo>,
@@ -83,59 +83,114 @@ pub struct Weapon {
     pub book_short_name: Option<String>,
 
     #[serde(default)]
-    pub effects: Vec<String>,
+    name_prefix: String,
+    #[serde(default)]
+    name_suffix: String,
 
     #[serde(default)]
-    pub minimum_strength:  String,
+    ammunition_cost: f32,
+    #[serde(default)]
+    ammunition_ap: f32,
+    #[serde(default)]
+    ammunition_weight_multiplier: f32,
 
     #[serde(default)]
-    pub tw_cost:  f32,
+    for_armor: bool,
     #[serde(default)]
-    pub tw_effects:  String,
+    for_shield: bool,
+    #[serde(default)]
+    for_weapon: bool,
+    #[serde(default)]
+    for_ammo: bool,
+
 
     #[serde(default)]
-    pub vehicle_mods:  u32,
+    weapon_min_str_adjustment: f32,
     #[serde(default)]
-    pub extra_notes:  String,
+    weapon_weight_multiplier: f32,
 
     #[serde(default)]
-    pub profiles: Vec<WeaponProfile>,
+    weapon_cost_adjustment: f32,
+    #[serde(default)]
+    weapon_cost_adjustment_is_multiplied: bool,
+    #[serde(default)]
+    weapon_cost_adjustment_is_per_pound: bool,
+    #[serde(default)]
+    weapon_cost_adjustment_is_per_ap: bool,
 
     #[serde(default)]
-    pub cost: f32,
+    weapon_accuracy: f32,
     #[serde(default)]
-    pub weight: f32,
+    weapon_parry: f32,
+    #[serde(default)]
+    weapon_damage: f32,
+    #[serde(default)]
+    weapon_ap: f32,
 
     #[serde(default)]
-    pub abilities: Vec<String>,
+    armor_min_str_adjustment: f32,
+    #[serde(default)]
+    armor_weight_multiplier: f32,
+
+    #[serde(default)]
+    armor_cost_adjustment: f32,
+    #[serde(default)]
+    armor_hardness_bonus: f32,
+    #[serde(default)]
+    armor_cost_adjustment_is_multiplied: bool,
+    #[serde(default)]
+    armor_cost_adjustment_is_per_pound: bool,
+    #[serde(default)]
+    armor_cost_adjustment_is_per_armor_value: bool,
+
+    #[serde(default)]
+    armor_armor_bonus: f32,
+
+    #[serde(default)]
+    shield_min_str_adjustment: f32,
+    #[serde(default)]
+    shield_weight_multiplier: f32,
+
+    #[serde(default)]
+    shield_cost_adjustment: f32,
+    #[serde(default)]
+    shield_hardness_bonus: f32,
+    #[serde(default)]
+    shield_cost_adjustment_is_multiplied: bool,
+    #[serde(default)]
+    shield_cost_adjustment_is_per_pound: bool,
+
+    #[serde(default)]
+    shield_parry_bonus: f32,
+
 }
 
-impl Weapon {
+impl GearEnhancement {
+
     pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
-            self.name.to_owned()
+            self.name.clone()
         } else {
-            self.custom_name.to_owned()
+            self.custom_name.clone()
         }
     }
-
     pub fn get_summary(&self) -> String {
-        self.summary.to_owned()
+        "get,summary".to_string()
     }
 
     pub fn apply(mut _char_obj: &PlayerCharacter) {}
 }
 
-impl Weapon {
+impl GearEnhancement {
     // pub fn import_from_id(
     //     &mut self,
     //     id: u32,
     //     available_data: &GameDataPackage,
     // ) {
 
-    //     for weapon in available_data.weapons.iter() {
-    //         if weapon.id == id {
-    //             self.import_from_definition( weapon.id, &weapon );
+    //     for gear_enhancement in available_data.gear_enhancements.iter() {
+    //         if gear_enhancement.id == id {
+    //             self.import_from_definition( gear_enhancement.id, &gear_enhancement );
     //             return;
     //         }
     //     }
@@ -144,12 +199,12 @@ impl Weapon {
     // pub fn import_from_definition(
     //     &mut self,
     //     id: u32,
-    //     def: &Weapon,
+    //     def: &GearEnhancement,
     // ) {
     //     self = def.clone();
     // }
 
-    pub fn import_vars(&mut self, vars_option: &Option<WeaponVars>) {
+    pub fn import_vars(&mut self, vars_option: &Option<GearEnhancementVars>) {
         match vars_option {
             Some(vars) => {
                 self.uuid = Uuid::parse_str(&vars.uuid).unwrap();
@@ -160,10 +215,10 @@ impl Weapon {
     }
 }
 
-impl Default for Weapon {
+impl Default for GearEnhancement {
     fn default() -> Self {
 
-        Weapon {
+        GearEnhancement {
             active: true,
             no_select: false,
             id: 0,
@@ -183,7 +238,6 @@ impl Default for Weapon {
             created_by: 0,
             updated_by: 0,
             deleted_by: 0,
-            abilities: Vec::new(),
 
             created_by_obj: None,
             deleted_by_obj: None,
@@ -192,21 +246,53 @@ impl Default for Weapon {
             book_name: None,
             book_short_name: None,
 
-            effects: Vec::new(),
 
-            minimum_strength:  "".to_owned(),
+            name_prefix: "".to_owned(),
+            name_suffix: "".to_owned(),
 
-            tw_cost: 0.0,
-            tw_effects:  "".to_owned(),
+            ammunition_cost: 0.0,
+            ammunition_ap: 0.0,
+            ammunition_weight_multiplier: 1.0,
 
-            vehicle_mods:  0,
-            extra_notes:  "".to_string(),
+            for_armor: false,
+            for_shield: false,
+            for_weapon: false,
+            for_ammo: false,
 
-            profiles: Vec::new(),
 
-            weight: 0.0,
+            weapon_min_str_adjustment: 0.0,
+            weapon_weight_multiplier: 1.0,
 
-            cost: 0.0,
+            weapon_cost_adjustment: 0.0,
+            weapon_cost_adjustment_is_multiplied: false,
+            weapon_cost_adjustment_is_per_pound: false,
+            weapon_cost_adjustment_is_per_ap: false,
+
+            weapon_accuracy: 0.0,
+            weapon_damage: 0.0,
+            weapon_parry: 0.0,
+            weapon_ap: 0.0,
+
+            armor_min_str_adjustment: 0.0,
+            armor_weight_multiplier: 1.0,
+
+            armor_cost_adjustment: 0.0,
+            armor_hardness_bonus: 0.0,
+            armor_cost_adjustment_is_multiplied: false,
+            armor_cost_adjustment_is_per_pound: false,
+            armor_cost_adjustment_is_per_armor_value: false,
+
+            armor_armor_bonus: 0.0,
+
+            shield_min_str_adjustment: 0.0,
+            shield_weight_multiplier: 1.0,
+
+            shield_cost_adjustment: 0.0,
+            shield_hardness_bonus: 0.0,
+            shield_cost_adjustment_is_multiplied: false,
+            shield_cost_adjustment_is_per_pound: false,
+
+            shield_parry_bonus: 0.0,
 
         }
 
@@ -214,7 +300,7 @@ impl Default for Weapon {
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct WeaponVars {
+pub struct GearEnhancementVars {
     #[serde(default)]
     pub custom_name: String,
     #[serde(default)]
@@ -222,17 +308,17 @@ pub struct WeaponVars {
 }
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
-pub struct WeaponCombo {
+pub struct GearEnhancementCombo {
     pub id: u32,
-    #[serde(default, alias = "weaponOptions")]
-    pub options: Option<WeaponVars>,
+    #[serde(default, alias = "gear_enhancementOptions")]
+    pub options: Option<GearEnhancementVars>,
     #[serde(default)]
-    pub def: Option<Weapon>,
+    pub def: Option<GearEnhancement>,
 }
 
-impl Default for WeaponCombo {
+impl Default for GearEnhancementCombo {
     fn default() -> Self {
-        WeaponCombo {
+        GearEnhancementCombo {
             id: 0,
             options: None,
             def: None,
@@ -241,7 +327,7 @@ impl Default for WeaponCombo {
 }
 
 #[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
-pub struct WeaponProfile {
+pub struct GearEnhancementProfile {
     #[serde(default)]
     pub name:  String,
     #[serde(default)]
@@ -265,7 +351,7 @@ pub struct WeaponProfile {
     #[serde(default, alias = "currentShots")]
     pub current_shots:  u32,
     #[serde(default)]
-    pub heavy_weapon: bool,
+    pub heavy_gear_enhancement: bool,
     #[serde(default)]
     pub melee_only: bool,
     #[serde(default)]
@@ -286,7 +372,7 @@ pub struct WeaponProfile {
     #[serde(default)]
     pub is_shield: bool,
     #[serde(default)]
-    pub thrown_weapon: bool,
+    pub thrown_gear_enhancement: bool,
 
     #[serde(default)]
     pub usable_in_melee: bool,
@@ -306,9 +392,9 @@ pub struct WeaponProfile {
     pub skill_value:  String,
 }
 
-impl Default for WeaponProfile {
+impl Default for GearEnhancementProfile {
     fn default() -> Self {
-        WeaponProfile {
+        GearEnhancementProfile {
             name:  "".to_string(),
             damage:  "".to_string(),
             damage_with_brackets:  "".to_string(),
@@ -321,7 +407,7 @@ impl Default for WeaponProfile {
             shots:  0,
             current_shots:  0,
 
-            heavy_weapon: false,
+            heavy_gear_enhancement: false,
             melee_only: false,
             counts_as_innate: false,
             notes:  "".to_string(),
@@ -333,7 +419,7 @@ impl Default for WeaponProfile {
             damage_dice_base_plus:  0,
 
             is_shield: false,
-            thrown_weapon: false,
+            thrown_gear_enhancement: false,
 
             usable_in_melee: false,
             add_strength_to_damage: false,

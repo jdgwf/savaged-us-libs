@@ -4,7 +4,7 @@ use chrono_tz::Tz;
 use serde::{Deserialize, Deserializer, Serialize};
 use serde_json;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub enum UserLevel {
     Anonymous = 0,
     NotActivated = 1,
@@ -20,7 +20,7 @@ impl Default for UserLevel {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct User {
     pub activated: bool,
     pub api_key: String,
@@ -157,6 +157,10 @@ impl User {
     pub fn get_name(&self) -> String {
         let export_name = self.first_name.to_owned() + &" ".to_owned() + &self.last_name.to_owned();
         return (export_name).trim().to_owned();
+    }
+
+    pub fn get_summary(&self) -> String {
+        return "User Summary".to_owned();
     }
 
     pub fn get_image(&self, base_url: &str) -> String {
@@ -474,7 +478,7 @@ impl User {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct LoginTokenResult {
     pub success: bool,
     pub active_notifications: u32,
@@ -487,27 +491,27 @@ pub struct LoginTokenResult {
     pub registered: Option<DateTime<Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct UserUpdateResult {
     pub success: bool,
     pub password_changed: bool,
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ImageUpdateResult {
     pub success: bool,
     pub image_url: String,
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct UserGroup {
     pub id: u32,
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, PartialEq, Clone, Debug)]
 pub struct LoginToken {
     pub last_seen: DateTime<Utc>,
     pub registered: DateTime<Utc>,

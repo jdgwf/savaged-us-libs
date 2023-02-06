@@ -8,6 +8,7 @@ pub mod gear;
 pub mod hindrance;
 pub mod imports;
 pub mod weapon;
+pub mod gear_enhancement;
 pub mod container_item;
 
 use self::game_data_package::GameDataPackage;
@@ -83,7 +84,7 @@ impl PlayerCharacter {
         let mut pc = PlayerCharacter {
             name: "".to_owned(),
             uuid: Uuid::new_v4(),
-            attributes: Attributes::new(),
+            attributes: Attributes::default(),
             selected_edges: Vec::new(),
             selected_hindrances: Vec::new(),
             added_edges: Vec::new(),
@@ -194,7 +195,7 @@ impl PlayerCharacter {
     pub fn reset(&mut self) {
         self.name = "".to_owned();
         self.uuid = Uuid::new_v4();
-        self.attributes = Attributes::new();
+        self.attributes = Attributes::default();
         self.selected_edges = Vec::new();
         self.selected_hindrances = Vec::new();
         self.added_edges = Vec::new();

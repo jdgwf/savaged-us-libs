@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use crate::user::UserLevel;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 // #[allow(non_snake_case)]
 // #[serde(rename_all = "camelCase")]
 pub struct PublicUserInfo {

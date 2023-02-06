@@ -3,7 +3,7 @@ use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
 pub struct Hindrance {
     // #[serde(default)]
     pub name: String,
@@ -57,6 +57,9 @@ pub struct Hindrance {
     pub deleted: bool,
 
     #[serde(default)]
+    pub no_select: bool,
+
+    #[serde(default)]
     pub created_by: u32,
 
     #[serde(default)]
@@ -76,9 +79,6 @@ pub struct Hindrance {
 
     #[serde(default)]
     pub base_name: String,
-
-    #[serde(default)]
-    pub no_select: bool,
 
     #[serde(default)]
     pub hidden_on_character_sheet: bool,
@@ -128,10 +128,10 @@ pub struct Hindrance {
 
 }
 
-impl Hindrance {
-    pub fn new() -> Hindrance {
+impl Default for Hindrance {
+    fn default() -> Self {
         //use the . operator to fetch the value of a field via the self keyword
-        Hindrance {
+        Self {
             name: "".to_owned(),
             summary: "".to_owned(),
             description: "".to_owned(),
@@ -185,6 +185,8 @@ impl Hindrance {
             updated_by_obj: None,
         }
     }
+}
+impl Hindrance {
     pub fn apply(mut _char_obj: &PlayerCharacter) {}
 }
 
@@ -207,12 +209,14 @@ impl Hindrance {
 
     pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
-            self.name.clone()
+            self.name.to_owned()
         } else {
-            self.custom_name.clone()
+            self.custom_name.to_owned()
         }
     }
-
+    pub fn get_summary(&self) -> String {
+        self.summary.to_owned()
+    }
     // pub fn import_from_definition(
     //     &mut self,
     //     id: u32,

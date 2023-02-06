@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 // use super::utils::float_to_int;
 use crate::public_user_info::PublicUserInfo;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, PartialEq, Clone, Debug)]
 pub enum HelpArticleSection {
     None = 0,
     Registration = 1,
@@ -16,7 +16,7 @@ pub enum HelpArticleSection {
     Campaigns = 5,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct HelpArticle {
     pub id: u32,
 
@@ -95,7 +95,7 @@ impl HelpArticle {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct SimpleHelpArticle {
     pub id: u32,
     pub name: String,

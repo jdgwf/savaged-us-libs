@@ -60,7 +60,13 @@ pub struct Race {
 
 impl Race {
 
-    pub fn new() -> Race {
+    pub fn apply( mut _char_obj: &PlayerCharacter ) {
+
+    }
+}
+impl Default for Race {
+
+    fn default() -> Race {
         //use the . operator to fetch the value of a field via the self keyword
         Race{
             active: true,
@@ -87,29 +93,12 @@ impl Race {
         }
     }
 
-    pub fn apply( mut _char_obj: &PlayerCharacter ) {
-
-    }
 }
 
-// WASM Bindgen Getters/Setters
 
 impl Race {
 
-    pub fn set_name( &mut self, new_name: String) {
-         self.name = new_name;
-    }
-
-    pub fn name( &self ) -> String {
-        self.name.clone()
-    }
-
-    pub fn set_uuid( &mut self, new_value: String) {
-        // self.uuid = uuid!( new_value[..] );
-        self.uuid = Uuid::parse_str( &new_value ).unwrap();
-    }
-
-    pub fn uuid( &self ) -> String {
-        self.uuid.to_owned()
+    pub fn get_summary(&self) -> String {
+        self.summary
     }
 }

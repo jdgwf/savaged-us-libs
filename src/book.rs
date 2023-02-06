@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 // use super::utils::bool_from_int_or_bool;
 // use super::utils::deserialize_null_default;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct Book {
     #[serde(default)]
     pub id: u32,

@@ -34,9 +34,8 @@ pub struct Attributes {
     pub max_strength: u8,
     pub max_vigor: u8,
 }
-
-impl Attributes {
-    pub fn new() -> Attributes {
+impl Default for Attributes {
+    fn default() -> Attributes {
         Attributes {
             selected_agility: 0,
             boosted_agility: 0,
@@ -71,6 +70,9 @@ impl Attributes {
             max_vigor: 4,
         }
     }
+}
+impl Attributes {
+
 
     pub fn agility_hr(&self) -> String {
         get_dice_value(

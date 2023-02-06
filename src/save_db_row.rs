@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use super::utils::bool_from_int_or_bool;
 use super::utils::deserialize_null_default;
 
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
 pub struct SaveDBRow {
     pub id: u32,
 

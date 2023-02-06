@@ -4,7 +4,7 @@ use crate::alert_level::AlertLevel;
 use crate::book::Book;
 use crate::game_data_row::GameDataRow;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, PartialEq, Clone, Debug)]
 pub struct FetchAdminParameters {
     #[serde(default)]
     pub api_key: Option<String>,
@@ -27,6 +27,9 @@ pub struct FetchAdminParameters {
 
     #[serde(default)]
     pub needs_book_list: bool,
+
+    #[serde(default)]
+    pub hide_no_select: bool,
 }
 
 pub fn new_fetch_admin_params() -> FetchAdminParameters {
@@ -40,17 +43,18 @@ pub fn new_fetch_admin_params() -> FetchAdminParameters {
         sort_by: None,
         sort_by_ascending: true,
         needs_book_list: true,
+        hide_no_select: false,
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, PartialEq, Clone, Debug)]
 pub struct AdminPagingStatistics {
     pub non_filtered_count: u32,
     pub filtered_count: u32,
     pub book_list: Option<Vec<Book>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct AdminSaveReturn {
     pub rows_affected: u32,
     pub level: AlertLevel,
@@ -58,7 +62,7 @@ pub struct AdminSaveReturn {
     pub game_data: Option<Vec<GameDataRow>>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct AdminSavePackage {
     #[serde(default)]
     pub api_key: Option<String>,
@@ -72,7 +76,7 @@ pub struct AdminSavePackage {
     pub fetch_parameters: FetchAdminParameters,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct AdminDeletePackage {
     #[serde(default)]
     pub api_key: Option<String>,

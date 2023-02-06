@@ -1,6 +1,6 @@
 use crate::{
     player_character::{
-        armor::Armor, edge::Edge, gear::Gear, hindrance::Hindrance, weapon::Weapon,
+        armor::Armor, edge::Edge, gear::Gear, hindrance::Hindrance, weapon::Weapon, gear_enhancement::GearEnhancement,
     },
     public_user_info::PublicUserInfo,
 };
@@ -8,7 +8,7 @@ use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct GameDataRow {
     pub active: bool,
     pub book_id: u32,
@@ -172,6 +172,37 @@ impl GameDataRow {
 
     pub fn to_armor(&self) -> Result<Armor, serde_json::Error> {
         let item_result: Result<Armor, serde_json::Error> =
+            serde_json::from_str(self.data.as_str());
+        match item_result {
+            Ok(mut item) => {
+                item.book_name = self.book_name.clone();
+                item.book_short_name = self.book_short_name.clone();
+
+                item.id = self.id;
+                item.active = self.active;
+                item.created_by = self.created_by;
+                item.deleted_by = self.deleted_by;
+                item.updated_by = self.updated_by;
+
+                item.created_on = self.created_on.clone();
+                item.deleted_on = self.deleted_on.clone();
+                item.updated_on = self.updated_on.clone();
+
+                item.created_by_obj = self.created_by_user.clone();
+                item.deleted_by_obj = self.deleted_by_user.clone();
+                item.updated_by_obj = self.updated_by_user.clone();
+
+                return Ok(item);
+            }
+            Err(err) => {
+                println!("{}", self.data);
+                return Err(err);
+            }
+        }
+    }
+
+    pub fn to_gear_enhancement(&self) -> Result<GearEnhancement, serde_json::Error> {
+        let item_result: Result<GearEnhancement, serde_json::Error> =
             serde_json::from_str(self.data.as_str());
         match item_result {
             Ok(mut item) => {

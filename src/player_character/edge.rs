@@ -5,7 +5,7 @@ use serde;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq)]
+#[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]
 pub struct Edge {
     #[serde(default)]
     pub id: u32,
@@ -45,6 +45,9 @@ pub struct Edge {
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
     #[serde(default)]
     pub deleted: bool,
+
+    #[serde(default)]
+    pub no_select: bool,
 
     #[serde(default)]
     pub created_by: u32,
@@ -89,10 +92,10 @@ pub struct Edge {
     pub abilities: Vec<String>,
 }
 
-impl Edge {
-    pub fn new() -> Edge {
+impl Default for Edge {
+    fn default() -> Self {
         //use the . operator to fetch the value of a field via the self keyword
-        Edge {
+        Self {
             active: true,
             id: 0,
             book_id: 0,
@@ -112,6 +115,8 @@ impl Edge {
             deleted_by: 0,
             abilities: Vec::new(),
 
+            no_select: false,
+
             cannot_be_selected: false,
 
             created_by_obj: None,
@@ -125,15 +130,21 @@ impl Edge {
             conflicts: Vec::new(),
         }
     }
+}
+
+impl Edge {
+
 
     pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
-            self.name.clone()
+            self.name.to_owned()
         } else {
-            self.custom_name.clone()
+            self.custom_name.to_owned()
         }
     }
-
+    pub fn get_summary(&self) -> String {
+        self.summary.to_owned()
+    }
     pub fn apply(mut _char_obj: &PlayerCharacter) {}
 }
 
