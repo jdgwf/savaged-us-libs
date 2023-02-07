@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use crate::public_user_info::PublicUserInfo;
 
 use super::utils::bool_from_int_or_bool;
-use super::utils::float_to_int;
+// use super::utils::float_to_int;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Partner {

@@ -1,5 +1,6 @@
 use crate::player_character::PlayerCharacter;
 use crate::public_user_info::PublicUserInfo;
+use crate::player_character::weapon::WeaponProfile;
 // use crate::utils::bool_from_int_or_bool;
 use chrono::prelude::*;
 // use serde_repr::*;
@@ -9,7 +10,7 @@ use serde;
 // use serde_with::DefaultOnError;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
-use super::weapon::Weapon;
+// use super::weapon::{Weapon, WeaponProfile};
 
 // #[serde_as]
 #[derive(Deserialize, PartialEq, Serialize, Clone, Debug )]
@@ -167,10 +168,13 @@ pub struct Armor {
     pub size: u32,
     #[serde(default)]
     pub default_model_label: String,
+
     #[serde(default)]
     pub alternate_modes: Vec<ArmorAlternateMode>,
+
     #[serde(default)]
-    pub integrated_weapons: Vec<Weapon>,
+    pub integrated_weapons: Vec<WeaponProfile>,
+
     #[serde(default)]
     pub zero_weight_when_equipped: bool,
 

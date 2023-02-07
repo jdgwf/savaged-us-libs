@@ -2,7 +2,7 @@ use crate::public_user_info::PublicUserInfo;
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use super::utils::bool_from_int_or_bool;
+// use super::utils::bool_from_int_or_bool;
 use super::utils::deserialize_null_default;
 
 #[derive(Deserialize, PartialEq, Serialize, Clone, Debug)]

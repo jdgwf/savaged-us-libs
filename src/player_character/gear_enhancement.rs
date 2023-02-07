@@ -83,85 +83,85 @@ pub struct GearEnhancement {
     pub book_short_name: Option<String>,
 
     #[serde(default)]
-    name_prefix: String,
+    pub name_prefix: String,
     #[serde(default)]
-    name_suffix: String,
+    pub name_suffix: String,
 
     #[serde(default)]
-    ammunition_cost: f32,
+    pub ammunition_cost: f32,
     #[serde(default)]
-    ammunition_ap: f32,
+    pub ammunition_ap: f32,
     #[serde(default)]
-    ammunition_weight_multiplier: f32,
+    pub ammunition_weight_multiplier: f32,
 
     #[serde(default)]
-    for_armor: bool,
+    pub for_armor: bool,
     #[serde(default)]
-    for_shield: bool,
+    pub for_shield: bool,
     #[serde(default)]
-    for_weapon: bool,
+    pub for_weapon: bool,
     #[serde(default)]
-    for_ammo: bool,
+    pub for_ammo: bool,
 
 
     #[serde(default)]
-    weapon_min_str_adjustment: f32,
+    pub weapon_min_str_adjustment: f32,
     #[serde(default)]
-    weapon_weight_multiplier: f32,
+    pub weapon_weight_multiplier: f32,
 
     #[serde(default)]
-    weapon_cost_adjustment: f32,
+    pub weapon_cost_adjustment: f32,
     #[serde(default)]
-    weapon_cost_adjustment_is_multiplied: bool,
+    pub weapon_cost_adjustment_is_multiplied: bool,
     #[serde(default)]
-    weapon_cost_adjustment_is_per_pound: bool,
+    pub weapon_cost_adjustment_is_per_pound: bool,
     #[serde(default)]
-    weapon_cost_adjustment_is_per_ap: bool,
+    pub weapon_cost_adjustment_is_per_ap: bool,
 
     #[serde(default)]
-    weapon_accuracy: f32,
+    pub weapon_accuracy: f32,
     #[serde(default)]
-    weapon_parry: f32,
+    pub weapon_parry: f32,
     #[serde(default)]
-    weapon_damage: f32,
+    pub weapon_damage: f32,
     #[serde(default)]
-    weapon_ap: f32,
+    pub weapon_ap: f32,
 
     #[serde(default)]
     armor_min_str_adjustment: f32,
     #[serde(default)]
-    armor_weight_multiplier: f32,
+    pub armor_weight_multiplier: f32,
 
     #[serde(default)]
-    armor_cost_adjustment: f32,
+    pub armor_cost_adjustment: f32,
     #[serde(default)]
-    armor_hardness_bonus: f32,
+    pub armor_hardness_bonus: f32,
     #[serde(default)]
-    armor_cost_adjustment_is_multiplied: bool,
+    pub armor_cost_adjustment_is_multiplied: bool,
     #[serde(default)]
-    armor_cost_adjustment_is_per_pound: bool,
+    pub armor_cost_adjustment_is_per_pound: bool,
     #[serde(default)]
-    armor_cost_adjustment_is_per_armor_value: bool,
+    pub armor_cost_adjustment_is_per_armor_value: bool,
 
     #[serde(default)]
-    armor_armor_bonus: f32,
+    pub armor_armor_bonus: f32,
 
     #[serde(default)]
-    shield_min_str_adjustment: f32,
+    pub shield_min_str_adjustment: f32,
     #[serde(default)]
-    shield_weight_multiplier: f32,
+    pub shield_weight_multiplier: f32,
 
     #[serde(default)]
-    shield_cost_adjustment: f32,
+    pub shield_cost_adjustment: f32,
     #[serde(default)]
-    shield_hardness_bonus: f32,
+    pub shield_hardness_bonus: f32,
     #[serde(default)]
-    shield_cost_adjustment_is_multiplied: bool,
+    pub shield_cost_adjustment_is_multiplied: bool,
     #[serde(default)]
-    shield_cost_adjustment_is_per_pound: bool,
+    pub shield_cost_adjustment_is_per_pound: bool,
 
     #[serde(default)]
-    shield_parry_bonus: f32,
+    pub shield_parry_bonus: f32,
 
 }
 
