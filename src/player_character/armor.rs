@@ -196,35 +196,41 @@ impl Armor {
             self.custom_name.to_owned()
         }
     }
+
     pub fn get_summary(&self) -> String {
-        self.summary.to_owned()
+        self.summary.trim().to_owned()
     }
 
     pub fn apply(mut _char_obj: &PlayerCharacter) {}
-}
 
-impl Armor {
-    // pub fn import_from_id(
-    //     &mut self,
-    //     id: u32,
-    //     available_data: &GameDataPackage,
-    // ) {
+    pub fn get_armor_value_hr(&self) -> String {
 
-    //     for armor in available_data.armors.iter() {
-    //         if armor.id == id {
-    //             self.import_from_definition( armor.id, &armor );
-    //             return;
-    //         }
-    //     }
-    // }
+        if self.armor_value > 0 {
+            return "Armor ".to_owned() + &self.armor_value.to_string();
+        }
 
-    // pub fn import_from_definition(
-    //     &mut self,
-    //     id: u32,
-    //     def: &Armor,
-    // ) {
-    //     self = def.clone();
-    // }
+        "".to_owned()
+    }
+
+
+    pub fn basic_info(&self) -> String {
+        let mut rv = "".to_owned();
+
+        if self.is_shield {
+            rv += &"Shield";
+        } else {
+            rv += &self.get_armor_value_hr();
+        }
+
+        if !self.get_summary().is_empty() {
+            if !rv.is_empty() {
+                rv += &"; ";
+            }
+            rv += &self.get_summary();
+        }
+
+        return rv;
+    }
 
     pub fn import_vars(&mut self, vars_option: &Option<ArmorVars>) {
         match vars_option {

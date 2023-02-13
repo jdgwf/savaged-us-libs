@@ -20,8 +20,8 @@ pub async fn get_user_saves(base_url: String, api_key: String) -> Vec<SaveDBRow>
     let user_saves = user_saves_result.unwrap().text().await.unwrap();
 
     // block_on(user_saves);
-    println!("Completed downloading user saves data from {}", &base_url);
-    println!("{}", &user_saves);
+    // println!("Completed downloading user saves data from {}", &base_url);
+    // println!("{}", &user_saves);
 
     let user_saves_return: Vec<SaveDBRow> = serde_json::from_str(&user_saves).unwrap();
     return user_saves_return;

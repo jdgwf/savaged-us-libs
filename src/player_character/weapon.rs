@@ -120,13 +120,11 @@ impl Weapon {
     }
 
     pub fn get_summary(&self) -> String {
-        self.summary.to_owned()
+        self.summary.trim().to_owned()
     }
 
     pub fn apply(mut _char_obj: &PlayerCharacter) {}
-}
 
-impl Weapon {
     // pub fn import_from_id(
     //     &mut self,
     //     id: u32,
@@ -148,6 +146,70 @@ impl Weapon {
     // ) {
     //     self = def.clone();
     // }
+
+    pub fn get_ap_hr(&self) -> String {
+
+        if self.profiles.len() > 0 {
+            if self.profiles[0].ap > 0 {
+                return "; AP ".to_owned() + &self.profiles[0].ap.to_string();
+            }
+        }
+        "".to_owned()
+    }
+
+    pub fn get_reach_hr(&self) -> String {
+
+        if self.profiles.len() > 0 {
+            if self.profiles[0].reach > 0 {
+                return "; Reach ".to_owned() + &self.profiles[0].reach.to_string();
+            }
+        }
+        "".to_owned()
+    }
+
+    pub fn get_range_hr(&self) -> String {
+
+        if self.profiles.len() > 0 {
+            if self.profiles[0].melee_only {
+                return "; Melee".to_owned();
+            } else {
+                return "; ".to_owned() + &self.profiles[0].range.to_owned();
+            }
+        } else {
+            return "; No Range?".to_owned();
+        }
+    }
+
+    pub fn get_damage_hr(&self) -> String {
+
+        if self.profiles.len() > 0 {
+            if self.profiles[0].add_strength_to_damage {
+                return ("Str+".to_owned() + &self.profiles[0].damage).to_owned();
+            } else {
+                return self.profiles[0].damage.to_owned();
+            }
+        } else {
+            return "No Damage?".to_owned();
+        }
+    }
+
+    pub fn basic_info(&self) -> String {
+        let mut rv = self.get_damage_hr();
+
+        // rv += &"; ";
+        rv += &self.get_range_hr();
+
+        rv += &self.get_ap_hr();
+
+        rv += &self.get_reach_hr();
+
+        if !self.get_summary().is_empty() {
+            rv += &"; ";
+            rv += &self.get_summary();
+        }
+
+        return rv;
+    }
 
     pub fn import_vars(&mut self, vars_option: &Option<WeaponVars>) {
         match vars_option {
@@ -260,6 +322,8 @@ pub struct WeaponProfile {
     pub requires_2_hands: bool,
     #[serde(default)]
     pub rof:  u32,
+
+
     #[serde(default)]
     pub shots:  u32,
     #[serde(default, alias = "currentShots")]

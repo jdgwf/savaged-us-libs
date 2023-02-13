@@ -72,7 +72,7 @@ impl GameDataRow {
                 return Ok(item);
             }
             Err(err) => {
-                println!("{}", self.data);
+                println!("{} {}", err, self.data);
                 return Err(err);
             }
         }
@@ -102,7 +102,7 @@ impl GameDataRow {
                 return Ok(item);
             }
             Err(err) => {
-                println!("{}", self.data);
+                println!("{} {}", err, self.data);
                 return Err(err);
             }
         }
@@ -133,7 +133,7 @@ impl GameDataRow {
                 return Ok(item);
             }
             Err(err) => {
-                println!("{}", self.data);
+                println!("{} {}", err, self.data);
                 return Err(err);
             }
         }
@@ -164,7 +164,7 @@ impl GameDataRow {
                 return Ok(item);
             }
             Err(err) => {
-                println!("{}", self.data);
+                println!("{} {}", err, self.data);
                 return Err(err);
             }
         }
@@ -195,7 +195,7 @@ impl GameDataRow {
                 return Ok(item);
             }
             Err(err) => {
-                println!("{}", self.data);
+                println!("{} {}", err, self.data);
                 return Err(err);
             }
         }
@@ -226,7 +226,7 @@ impl GameDataRow {
                 return Ok(item);
             }
             Err(err) => {
-                println!("{}", self.data);
+                println!("{} {}", err, self.data);
                 return Err(err);
             }
         }
