@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-
 use crate::{help_article::SimpleHelpArticle, partner::SimplePartner, banner::SimpleBanner, announcement::SimpleAnnouncement, user::User};
 
 
@@ -11,3 +10,4 @@ pub struct WebContent {
     pub help_articles: Option<Vec<SimpleHelpArticle>>,
     pub user: Option<User>,
 }
+
