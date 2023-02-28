@@ -73,7 +73,6 @@ impl Default for Attributes {
 }
 impl Attributes {
 
-
     pub fn agility_hr(&self) -> String {
         get_dice_value(
             self.selected_agility + self.boosted_agility,

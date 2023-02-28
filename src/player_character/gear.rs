@@ -126,7 +126,6 @@ pub struct Gear {
 
 impl Gear {
 
-
     pub fn get_name(&self) -> String {
         if self.custom_name.is_empty() {
             self.name.to_owned()

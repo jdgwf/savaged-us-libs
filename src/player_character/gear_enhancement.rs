@@ -103,7 +103,6 @@ pub struct GearEnhancement {
     #[serde(default)]
     pub for_ammo: bool,
 
-
     #[serde(default)]
     pub weapon_min_str_adjustment: f32,
     #[serde(default)]
@@ -246,7 +245,6 @@ impl Default for GearEnhancement {
             book_name: None,
             book_short_name: None,
 
-
             name_prefix: "".to_owned(),
             name_suffix: "".to_owned(),
 
@@ -258,7 +256,6 @@ impl Default for GearEnhancement {
             for_shield: false,
             for_weapon: false,
             for_ammo: false,
-
 
             weapon_min_str_adjustment: 0.0,
             weapon_weight_multiplier: 1.0,

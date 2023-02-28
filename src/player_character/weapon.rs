@@ -323,7 +323,6 @@ pub struct WeaponProfile {
     #[serde(default)]
     pub rof:  u32,
 
-
     #[serde(default)]
     pub shots:  u32,
     #[serde(default, alias = "currentShots")]

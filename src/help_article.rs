@@ -1,7 +1,6 @@
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 
-
 // use super::utils::bool_from_int_or_bool;
 // use super::utils::float_to_int;
 use crate::public_user_info::PublicUserInfo;
@@ -74,7 +73,6 @@ impl Default for HelpArticle {
             deleted_on: None,
             updated_by: 0,
             updated_on: None,
-
 
             created_by_obj: None,
             deleted_by_obj: None,

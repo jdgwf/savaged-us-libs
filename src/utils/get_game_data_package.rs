@@ -13,7 +13,7 @@ pub async fn get_game_data_package(base_url: String, api_key: String) -> GameDat
     });
 
     let game_data_result = client
-        .post(base_url.clone() + &"/_api/game-data-get")
+        .post(base_url.clone() + &"/_api/game-data/get")
         .json(&map)
         .send()
         .await;

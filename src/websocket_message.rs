@@ -14,8 +14,8 @@ use crate::web_content::WebContent;
 pub enum WebsocketMessageType {
     Online = 1,
     Offline = 2,
-    GameDataPackage = 3,
-    Saves = 4,
+    GameDataPackageUpdated = 3,
+    SavesUpdated = 4,
     Logout = 5,
     SetLocation = 6,
     SetRoom = 7,
@@ -39,7 +39,7 @@ pub struct WebSocketMessage {
 impl Default for WebSocketMessage {
     fn default() -> Self {
         WebSocketMessage {
-            kind: WebsocketMessageType::Saves,
+            kind: WebsocketMessageType::SavesUpdated,
             token: None,
             user: None,
             payload: None,

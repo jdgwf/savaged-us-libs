@@ -95,7 +95,6 @@ impl Default for Race {
 
 }
 
-
 impl Race {
 
     pub fn get_summary(&self) -> String {

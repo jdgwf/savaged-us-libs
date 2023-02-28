@@ -15,7 +15,7 @@ pub struct Book {
     // #[serde(default)]
     pub name: String,
 
-    // #[serde(default)]
+    #[serde(default)]
     pub short_name: String,
 
     #[serde(default)]

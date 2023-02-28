@@ -118,7 +118,6 @@ pub struct Armor {
     pub pf_armor_type: u32,
     // pub pf_armor_type: PathfinderArmorType,
 
-
     #[serde(default)]
     pub ap_vs_lasers: u32,
     // #[serde(default, deserialize_with = "bool_from_int_or_bool")]
@@ -211,7 +210,6 @@ impl Armor {
 
         "".to_owned()
     }
-
 
     pub fn basic_info(&self) -> String {
         let mut rv = "".to_owned();

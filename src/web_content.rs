@@ -1,7 +1,6 @@
 use serde::{Deserialize, Serialize};
 use crate::{help_article::SimpleHelpArticle, partner::SimplePartner, banner::SimpleBanner, announcement::SimpleAnnouncement, user::User};
 
-
 #[derive(Serialize, PartialEq, Deserialize, Clone, Debug)]
 pub struct WebContent {
     pub partners: Option<Vec<SimplePartner>>,

@@ -149,7 +149,6 @@ impl Default for User {
             zombie_on: None,
             theme_css: "_default_".to_owned(),
 
-
         }
     }
 }
